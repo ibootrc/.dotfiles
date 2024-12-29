@@ -20,7 +20,7 @@ progress_bar_corner_radius = 3
 
 # Colors
 foreground = "#cdd1dc"
-frame_color = "#2274d5"
+frame_color = "#2d303c"
 highlight = "#2274d5, #82aad9"
 
 # Text
