@@ -40,6 +40,9 @@ vim.opt.fillchars = {
     diff = "-", -- Horizontal line for diffs
 }
 
+
+vim.api.nvim_set_keymap('n', 'q', 'q', { noremap = true, silent = true })
+
 -- Key mappings
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 vim.keymap.set("n", "<C-d>", "<C-d>zz")
