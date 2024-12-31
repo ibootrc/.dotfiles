@@ -28,8 +28,7 @@ bindsym $mod+x --release exec --no-startup-id xkill
 bindsym $mod+u exec xbacklight -inc 15
 bindsym $mod+d exec xbacklight -dec 15
 # Reboot & shutdown
-bindsym Ctrl+r exec reboot 
-bindsym Ctrl+s exec shutdown -now 
+bindsym Ctrl+Shift+s exec shutdown -now 
 
 # focus_follows_mouse no
 # alternatively, you can use the cursor keys:

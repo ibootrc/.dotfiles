@@ -41,7 +41,6 @@ vim.opt.fillchars = {
 }
 
 
-vim.api.nvim_set_keymap('n', 'q', 'q', { noremap = true, silent = true })
 
 -- Key mappings
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
