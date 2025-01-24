@@ -72,6 +72,8 @@ scrollable_menu=true
 shadowless_popup=false
 splitter_width=1
 drag_from_buttons=false
+menu_blur_radius=0
+tooltip_blur_radius=0
 
 [GeneralColors]
 window.color=#242424
@@ -126,6 +128,7 @@ centered_forms=false
 kinetic_scrolling=false
 noninteger_translucency=false
 style_vertical_toolbars=false
+blur_only_active_window=false
 
 [BaseWidget]
 interior=true

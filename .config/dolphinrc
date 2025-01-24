@@ -1,10 +1,6 @@
 MenuBar=Disabled
 
 [General]
-EditableUrl=true
-RememberOpenedTabs=false
-ShowFullPath=true
-ShowSpaceInfo=false
 Version=202
 ViewPropsTimestamp=2024,5,7,15,7,32.76
 

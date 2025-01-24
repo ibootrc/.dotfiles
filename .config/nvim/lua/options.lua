@@ -43,6 +43,7 @@ vim.opt.fillchars = {
 
 
 -- Key mappings
+vim.keymap.set("i", "jj", "<Esc>", { noremap = true })
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 vim.keymap.set("n", "<C-d>", "<C-d>zz")
 vim.keymap.set("n", "<C-u>", "<C-u>zz")

@@ -179,7 +179,7 @@ exec --no-startup-id dbus-launch clipit
 exec --no-startup-id xclip
 exec --no-startup-id udiskie -ans
 exec --no-startup-id synclient VertEdgeScroll=1 TapButton1=1 TapButton2=1 TapButton3=1
-exec --no-startup-id "setxkbmap -model pc105 -layout us,ara -option grp:alt_shift_toggle"
+exec --no-startup-id "setxkbmap -model pc105 -layout us,ara -option grp:alt_shift_toggle -option cap=ctrl"
 
 
 bar {

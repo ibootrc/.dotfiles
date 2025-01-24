@@ -23,7 +23,7 @@ fi
 # For a full list of active aliases
 #
 # Example aliases
-alias update="sudo pacman -Syy"
+alias update="sudo pacman -Syy --noconfirm"
 alias install="sudo pacman -S"
 alias remove="sudo pacman -Rns"
 alias shut="shutdown now"
@@ -44,6 +44,9 @@ export LESS_TERMCAP_se=$'\e[0m'        # reset reverse video
 export LESS_TERMCAP_ue=$'\e[0m'        # reset underline
 export GROFF_NO_SGR=1                  # for konsole and gnome-terminal
 
+bindkey -r '^j'
+bindkey '^j' autosuggest-accept
+
 
 export XDG_RUNTIME_DIR=/run/user/1000
 # Set up fzf key bindings and fuzzy completion
@@ -53,3 +56,4 @@ eval "$(fzf --zsh)"
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
