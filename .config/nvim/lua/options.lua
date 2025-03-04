@@ -15,6 +15,8 @@ vim.opt.incsearch = true
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
 vim.opt.list = true
+vim.opt.breakindent = true
+vim.opt.signcolumn = 'yes'
 vim.opt.listchars = { tab = "» ", trail = "·", nbsp = "␣" }
 vim.opt.wildignore:append({ "*/node_modules/*" })
 
@@ -65,15 +67,6 @@ vim.api.nvim_create_autocmd("BufWinEnter", {
     end
 })
 
---[[
-Netrw
-vim.keymap.set("n", "<leader>e", vim.cmd.Ex)
-vim.keymap.set("n", "<leader>q", vim.cmd.bd)
-vim.g.netrw_banner = 0
-vim.g.netrw_liststyle = 0
-vim.g.netrw_bufsettings = "noma nomod nu rnu nobl nowrap ro"
-
-]]
 
 -- Noice
 vim.keymap.set("n", "<leader>mm", "<cmd>NoiceDismiss<CR>", { desc = "Dismiss Noice Message" })

@@ -6,8 +6,8 @@ export ZSH_THEME="robbyrussell"
 
 # Which plugins would you like to load?
 export plugins=(
-	zsh-autosuggestions
-	zsh-syntax-highlighting
+zsh-autosuggestions
+zsh-syntax-highlighting
 
 )
 

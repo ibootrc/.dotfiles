@@ -7,7 +7,7 @@ return {
 			build = "make",
 		},
 		"nvim-telescope/telescope-file-browser.nvim",
-	  "nvim-tree/nvim-web-devicons",
+		"nvim-tree/nvim-web-devicons",
 
 	},
 	keys = {
@@ -138,11 +138,11 @@ return {
 		require("telescope").load_extension("file_browser")
 	end,
 
--- Apply highlights explicitly after Telescope setup
-vim.schedule(function()
-    vim.api.nvim_set_hl(0, "TelescopeSelection", { fg = "#A8D8E6", bg = "#4a4a4a", bold = true })
-    vim.api.nvim_set_hl(0, "TelescopeMatching", { fg = "#FFB86C" })
-    vim.api.nvim_set_hl(0, "TelescopePromptPrefix", { fg = "#56B6C2" })
-end)
+	-- Apply highlights explicitly after Telescope setup
+	vim.schedule(function()
+		vim.api.nvim_set_hl(0, "TelescopeSelection", { fg = "#A8D8E6", bg = "#4a4a4a", bold = true })
+		vim.api.nvim_set_hl(0, "TelescopeMatching", { fg = "#FFB86C" })
+		vim.api.nvim_set_hl(0, "TelescopePromptPrefix", { fg = "#56B6C2" })
+	end)
 }
 

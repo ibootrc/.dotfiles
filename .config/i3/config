@@ -8,7 +8,7 @@ font xft:URWGothic-Book 10
 # Use Mouse+$mod to drag floating windows floating_modifier $mod	
 
 # start a terminal
-bindsym $mod+Return exec qterminal
+bindsym $mod+Return exec kitty
 
 # kill focused window
 bindsym $mod+q kill
@@ -19,7 +19,6 @@ bindsym $mod+space exec --no-startup-id rofi -show drun -show-icons
 
 # Start Applications
 bindsym F3 exec firefox  
-#bindsym Shift+F3 exec chromium --incognito 
 bindsym Shift+F3 exec firefox --private-window
 bindsym F4 exec dolphin
 bindsym $mod+x --release exec --no-startup-id xkill
@@ -120,13 +119,13 @@ bindsym Ctrl+5 move container to workspace $ws5; workspace $ws5
 
 # Open specific applications in floating mode
 
-for_window [title="File Transfer*"] floating enable
+for_window [title="File Transfer*"] floating enable, move position center
 for_window [title="DevTools -*"] floating disable
 for_window [class="Lxappearance"] floating enable
-for_window [class="qimgv"] floating enable
-for_window [class="Nitrogen"] floating enable border set 640 440
+for_window [class="qimgv"] floating enable, move position center
+for_window [class="Nitrogen"] floating enable resize set 640 440, move position center
 for_window [class="Pavucontrol"] floating enable
-for_window [class="qt6ct"] floating enable resize set 700 540
+for_window [class="qt6ct"] floating enable resize set 700 540, move position center
 for_window [window_role="pop-up"] floating enable, move position center
 for_window [window_role="Msgcompose"] floating enable resize set 922 547
 for_window [window_type="dialog"] floating enable resize set 700 540, move position center
@@ -141,7 +140,7 @@ bindsym Shift+Print exec --no-startup-id maim --select "/home/$USER/Pictures/Scr
 
 # switch to workspace with urgent window automatically
 #for_window [urgent=latest] focus
-for_window [urgent="latest" class="Chromium" workspace=$ws1] focus ; workspace number $ws1
+for_window [urgent="latest" class="firefox" workspace=$ws1] focus ; workspace number $ws1
 
 # reload the configuration file
 bindsym $mod+Shift+c reload

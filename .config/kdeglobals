@@ -1,0 +1,15 @@
+[Colors:View]
+BackgroundNormal=#00000000
+
+[General]
+TerminalApplication=qterminal
+
+[KDE]
+ShowDeleteCommand=false
+
+[PreviewSettings]
+EnableRemoteFolderThumbnail=false
+MaximumRemoteSize=0
+
+[UiSettings]
+ColorScheme=*
