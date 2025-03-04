@@ -2,7 +2,7 @@
 BackgroundNormal=#00000000
 
 [General]
-TerminalApplication=qterminal
+TerminalApplication=kitty
 
 [KDE]
 ShowDeleteCommand=false
