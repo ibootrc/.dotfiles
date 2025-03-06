@@ -19,6 +19,10 @@ vim.opt.breakindent = true
 vim.opt.signcolumn = 'yes'
 vim.opt.listchars = { tab = "» ", trail = "·", nbsp = "␣" }
 vim.opt.wildignore:append({ "*/node_modules/*" })
+vim.opt.swapfile = false
+vim.opt.backup = false
+vim.opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
+vim.opt.undofile = true
 
 -- Highlight settingsvim.cmd([[highlight LineNr guibg=bg]])
 
