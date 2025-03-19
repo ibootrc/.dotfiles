@@ -15,7 +15,7 @@ vim.opt.incsearch = true
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
 vim.opt.list = true
-vim.opt.breakindent = true
+vim.opt.breakindent = false
 vim.opt.signcolumn = 'yes'
 vim.opt.listchars = { tab = "» ", trail = "·", nbsp = "␣" }
 vim.opt.wildignore:append({ "*/node_modules/*" })
@@ -25,11 +25,10 @@ vim.opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
 vim.opt.undofile = true
 
 -- Highlight settingsvim.cmd([[highlight LineNr guibg=bg]])
-
 vim.cmd([[
 augroup CustomCursorLineHighlight
-    autocmd!
-    autocmd VimEnter * highlight CursorLine guifg=#A8D8E6 guibg=#4a4a4a
+autocmd!
+autocmd VimEnter * highlight CursorLine guifg=#A8D8E6 guibg=#4a4a4a
 augroup END
 ]])
 
@@ -40,21 +39,28 @@ vim.opt.foldcolumn = "0"
 vim.cmd([[highlight FoldColumn guibg=bg]])
 vim.cmd([[highlight VertSplit guifg=bg guibg=bg]])
 vim.opt.fillchars = {
-    vert = "|", -- Simple vertical line
-    fold = "-", -- Simple fold separator
-    eob = "~",  -- Keep classic end-of-buffer markers
-    diff = "-", -- Horizontal line for diffs
+	vert = "|", -- Simple vertical line
+	fold = "-", -- Simple fold separator
+	eob = "~",  -- Keep classic end-of-buffer markers
+	diff = "-", -- Horizontal line for diffs
 }
 
 
 
 -- Key mappings
-vim.keymap.set("i", "jj", "<Esc>", { noremap = true })
+--vim.keymap.set("i", "jj", "<Esc>", { noremap = true })
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 vim.keymap.set("n", "<C-d>", "<C-d>zz")
 vim.keymap.set("n", "<C-u>", "<C-u>zz")
 vim.keymap.set("n", "n", "nzzzv")
 vim.keymap.set("n", "N", "Nzzzv")
+vim.keymap.set("n", "<C-n>", "<cmd>cnext<CR>zz")
+vim.keymap.set("n", "<C-p>", "<cmd>lprev<CR>zz")
+
+vim.keymap.set("n", "<leader><leader>", function()
+	vim.cmd("so")
+	print("Config Reloaded!")
+end)
 
 -- Use CTRL+<hjkl> to switch between windows
 vim.keymap.set('n', '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
@@ -64,11 +70,11 @@ vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper win
 
 -- Help pages in vertical splits
 vim.api.nvim_create_autocmd("BufWinEnter", {
-    group = vim.api.nvim_create_augroup("help_window_right", {}),
-    pattern = { "*.txt" },
-    callback = function()
-        if vim.o.filetype == 'help' then vim.cmd.wincmd("L") end
-    end
+	group = vim.api.nvim_create_augroup("help_window_right", {}),
+	pattern = { "*.txt" },
+	callback = function()
+		if vim.o.filetype == 'help' then vim.cmd.wincmd("L") end
+	end
 })
 
 
@@ -81,32 +87,34 @@ vim.opt.splitbelow = true
 
 -- Highlight when yanking (copying) text
 vim.api.nvim_create_autocmd("TextYankPost", {
-    desc = "Highlight when yanking (copying) text",
-    group = vim.api.nvim_create_augroup("kickstart-highlight-yank", { clear = true }),
-    callback = function()
-        vim.highlight.on_yank()
-    end,
+	desc = "Highlight when yanking (copying) text",
+	group = vim.api.nvim_create_augroup("kickstart-highlight-yank", { clear = true }),
+	callback = function()
+		vim.highlight.on_yank()
+	end,
 })
 
 -- Set cursor line number color 
 vim.api.nvim_create_autocmd("BufWinEnter", {
-    callback = function()
-        vim.api.nvim_set_hl(0, 'CursorLineNr', { fg = '#A8D8E6', bold = true })
-    end
+	callback = function()
+		vim.api.nvim_set_hl(0, 'CursorLineNr', { fg = '#A8D8E6', bold = true })
+	end
 })
 
 -- Adjust number width and sign column for help pages
 vim.api.nvim_create_autocmd("FileType", {
-    pattern = "help",
-    callback = function()
-        vim.wo.number = true            -- Enable line numbers for help files
-        vim.wo.relativenumber = true   -- Optional: disable relative numbers for help files
-        vim.wo.numberwidth = 1          -- Reduce number column width
-        vim.wo.signcolumn = "no"       -- Remove the sign column in help files
-    end,
+	pattern = "help",
+	callback = function()
+		vim.wo.number = true            -- Enable line numbers for help files
+		vim.wo.relativenumber = true   -- Optional: disable relative numbers for help files
+		vim.wo.numberwidth = 1          -- Reduce number column width
+		vim.wo.signcolumn = "no"       -- Remove the sign column in help files
+	end,
 })
 
 -- Disable the right-click popup menu
 vim.api.nvim_set_keymap('n', '<RightMouse>', '<NOP>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('v', '<RightMouse>', '<NOP>', { noremap = true, silent = true })
+
+
 

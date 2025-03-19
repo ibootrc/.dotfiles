@@ -63,6 +63,14 @@ return {
 			desc = "Lists Function names, variables, from Treesitter",
 		},
 		{
+			";c",
+			function()
+				local builtin = require("telescope.builtin")
+				builtin.current_buffer_fuzzy_find() -- Search only in the open buffer
+			end,
+			desc = "Live grep in the current buffer",
+		},
+		{
 			"sf",
 			function()
 				local telescope = require("telescope")
