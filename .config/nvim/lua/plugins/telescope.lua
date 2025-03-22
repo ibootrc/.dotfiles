@@ -8,7 +8,6 @@ return {
 		},
 		"nvim-telescope/telescope-file-browser.nvim",
 		"nvim-tree/nvim-web-devicons",
-
 	},
 	keys = {
 		{
@@ -28,7 +27,8 @@ return {
 				local builtin = require("telescope.builtin")
 				builtin.live_grep()
 			end,
-			desc = "Search for a string in your current working directory and get results live as you type, respects .gitignore",
+			desc =
+			"Search for a string in your current working directory and get results live as you type, respects .gitignore",
 		},
 		{
 			"\\\\",
@@ -107,7 +107,8 @@ return {
 			mappings = {
 				n = {},
 			},
-		})		opts.pickers = {
+		})
+		opts.pickers = {
 			diagnostics = {
 				theme = "ivy",
 				initial_mode = "normal",
@@ -151,6 +152,5 @@ return {
 		vim.api.nvim_set_hl(0, "TelescopeSelection", { fg = "#A8D8E6", bg = "#4a4a4a", bold = true })
 		vim.api.nvim_set_hl(0, "TelescopeMatching", { fg = "#FFB86C" })
 		vim.api.nvim_set_hl(0, "TelescopePromptPrefix", { fg = "#56B6C2" })
-	end)
+	end),
 }
-
