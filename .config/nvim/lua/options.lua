@@ -16,13 +16,18 @@ vim.opt.ignorecase = true
 vim.opt.smartcase = true
 vim.opt.list = true
 vim.opt.breakindent = false
-vim.opt.signcolumn = 'yes'
+vim.opt.signcolumn = "yes"
 vim.opt.listchars = { tab = "» ", trail = "·", nbsp = "␣" }
 vim.opt.wildignore:append({ "*/node_modules/*" })
 vim.opt.swapfile = false
 vim.opt.backup = false
 vim.opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
 vim.opt.undofile = true
+vim.keymap.set("n", "s", "<Nop>", { noremap = true, silent = true })
+
+-- creat fake empty line at the top of file fix tmux statusbar
+vim.cmd("hi StatusLine guibg=NONE guifg=NONE")
+vim.opt.laststatus = 3
 
 -- Highlight settingsvim.cmd([[highlight LineNr guibg=bg]])
 vim.cmd([[
@@ -41,11 +46,9 @@ vim.cmd([[highlight VertSplit guifg=bg guibg=bg]])
 vim.opt.fillchars = {
 	vert = "|", -- Simple vertical line
 	fold = "-", -- Simple fold separator
-	eob = "~",  -- Keep classic end-of-buffer markers
+	eob = "~", -- Keep classic end-of-buffer markers
 	diff = "-", -- Horizontal line for diffs
 }
-
-
 
 -- Key mappings
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
@@ -64,20 +67,21 @@ vim.keymap.set("n", "<leader><leader>", function()
 	print("Config Reloaded!")
 end)
 -- Use CTRL+<hjkl> to switch between windows
-vim.keymap.set('n', '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
-vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
-vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
-vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
+vim.keymap.set("n", "<C-h>", "<C-w><C-h>", { desc = "Move focus to the left window" })
+vim.keymap.set("n", "<C-l>", "<C-w><C-l>", { desc = "Move focus to the right window" })
+vim.keymap.set("n", "<C-j>", "<C-w><C-j>", { desc = "Move focus to the lower window" })
+vim.keymap.set("n", "<C-k>", "<C-w><C-k>", { desc = "Move focus to the upper window" })
 
 -- Help pages in vertical splits
 vim.api.nvim_create_autocmd("BufWinEnter", {
 	group = vim.api.nvim_create_augroup("help_window_right", {}),
 	pattern = { "*.txt" },
 	callback = function()
-		if vim.o.filetype == 'help' then vim.cmd.wincmd("L") end
-	end
+		if vim.o.filetype == "help" then
+			vim.cmd.wincmd("L")
+		end
+	end,
 })
-
 
 -- Noice
 vim.keymap.set("n", "<leader>mm", "<cmd>NoiceDismiss<CR>", { desc = "Dismiss Noice Message" })
@@ -95,27 +99,24 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 	end,
 })
 
--- Set cursor line number color 
+-- Set cursor line number color
 vim.api.nvim_create_autocmd("BufWinEnter", {
 	callback = function()
-		vim.api.nvim_set_hl(0, 'CursorLineNr', { fg = '#A8D8E6', bold = true })
-	end
+		vim.api.nvim_set_hl(0, "CursorLineNr", { fg = "#A8D8E6", bold = true })
+	end,
 })
 
 -- Adjust number width and sign column for help pages
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = "help",
 	callback = function()
-		vim.wo.number = true            -- Enable line numbers for help files
-		vim.wo.relativenumber = true   -- Optional: disable relative numbers for help files
-		vim.wo.numberwidth = 1          -- Reduce number column width
-		vim.wo.signcolumn = "no"       -- Remove the sign column in help files
+		vim.wo.number = true       -- Enable line numbers for help files
+		vim.wo.relativenumber = true -- Optional: disable relative numbers for help files
+		vim.wo.numberwidth = 1     -- Reduce number column width
+		vim.wo.signcolumn = "no"   -- Remove the sign column in help files
 	end,
 })
 
 -- Disable the right-click popup menu
-vim.api.nvim_set_keymap('n', '<RightMouse>', '<NOP>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('v', '<RightMouse>', '<NOP>', { noremap = true, silent = true })
-
-
-
+vim.api.nvim_set_keymap("n", "<RightMouse>", "<NOP>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("v", "<RightMouse>", "<NOP>", { noremap = true, silent = true })

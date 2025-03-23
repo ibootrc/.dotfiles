@@ -8,6 +8,8 @@ return {
 		},
 		"nvim-telescope/telescope-file-browser.nvim",
 		"nvim-tree/nvim-web-devicons",
+		-- Add telescope-undo.nvim
+		{ "debugloop/telescope-undo.nvim" },
 	},
 	keys = {
 		{
@@ -27,8 +29,7 @@ return {
 				local builtin = require("telescope.builtin")
 				builtin.live_grep()
 			end,
-			desc =
-			"Search for a string in your current working directory and get results live as you type, respects .gitignore",
+			desc = "Search for a string in your current working directory and get results live as you type, respects .gitignore",
 		},
 		{
 			"\\\\",
@@ -92,6 +93,14 @@ return {
 			end,
 			desc = "Open File Browser with the path of the current buffer",
 		},
+		-- Add keybinding for undo history
+		{
+			";u",
+			function()
+				require("telescope").extensions.undo.undo()
+			end,
+			desc = "Open undo history",
+		},
 	},
 	config = function(_, opts)
 		local telescope = require("telescope")
@@ -120,12 +129,9 @@ return {
 		opts.extensions = {
 			file_browser = {
 				theme = "dropdown",
-				-- disables netrw and use telescope-file-browser in its place
 				hijack_netrw = true,
 				mappings = {
-					-- your custom insert mode mappings
 					["n"] = {
-						-- your custom normal mode mappings
 						["N"] = fb_actions.create,
 						["h"] = fb_actions.goto_parent_dir,
 						["<C-u>"] = function(prompt_bufnr)
@@ -143,8 +149,11 @@ return {
 			},
 		}
 		telescope.setup(opts)
-		require("telescope").load_extension("fzf")
-		require("telescope").load_extension("file_browser")
+
+		-- Load Telescope Extensions
+		telescope.load_extension("fzf")
+		telescope.load_extension("file_browser")
+		telescope.load_extension("undo") -- Load undo extension
 	end,
 
 	-- Apply highlights explicitly after Telescope setup
