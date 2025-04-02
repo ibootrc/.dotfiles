@@ -25,10 +25,6 @@ vim.opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
 vim.opt.undofile = true
 vim.keymap.set("n", "s", "<Nop>", { noremap = true, silent = true })
 
--- creat fake empty line at the top of file fix tmux statusbar
-vim.cmd("hi StatusLine guibg=NONE guifg=NONE")
-vim.opt.laststatus = 3
-
 -- Highlight settingsvim.cmd([[highlight LineNr guibg=bg]])
 vim.cmd([[
 augroup CustomCursorLineHighlight
@@ -39,7 +35,6 @@ augroup END
 
 -- UI and Visual Customizations
 -- Customize the appearance of fold column, vertical splits, and fill characters
-
 vim.opt.foldcolumn = "0"
 vim.cmd([[highlight FoldColumn guibg=bg]])
 vim.cmd([[highlight VertSplit guifg=bg guibg=bg]])
@@ -58,14 +53,13 @@ vim.keymap.set("n", "n", "nzzzv")
 vim.keymap.set("n", "N", "Nzzzv")
 vim.keymap.set("n", "<C-n>", "<cmd>cnext<CR>zz")
 vim.keymap.set("n", "<C-p>", "<cmd>lprev<CR>zz")
-
-vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
-vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
-
+vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv", { silent = true })
+vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv", { silent = true })
 vim.keymap.set("n", "<leader><leader>", function()
 	vim.cmd("so")
 	print("Config Reloaded!")
 end)
+
 -- Use CTRL+<hjkl> to switch between windows
 vim.keymap.set("n", "<C-h>", "<C-w><C-h>", { desc = "Move focus to the left window" })
 vim.keymap.set("n", "<C-l>", "<C-w><C-l>", { desc = "Move focus to the right window" })
@@ -82,9 +76,6 @@ vim.api.nvim_create_autocmd("BufWinEnter", {
 		end
 	end,
 })
-
--- Noice
-vim.keymap.set("n", "<leader>mm", "<cmd>NoiceDismiss<CR>", { desc = "Dismiss Noice Message" })
 
 -- Configure how new splits should be opened
 vim.opt.splitright = true
@@ -110,10 +101,10 @@ vim.api.nvim_create_autocmd("BufWinEnter", {
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = "help",
 	callback = function()
-		vim.wo.number = true       -- Enable line numbers for help files
+		vim.wo.number = true -- Enable line numbers for help files
 		vim.wo.relativenumber = true -- Optional: disable relative numbers for help files
-		vim.wo.numberwidth = 1     -- Reduce number column width
-		vim.wo.signcolumn = "no"   -- Remove the sign column in help files
+		vim.wo.numberwidth = 1 -- Reduce number column width
+		vim.wo.signcolumn = "no" -- Remove the sign column in help files
 	end,
 })
 
