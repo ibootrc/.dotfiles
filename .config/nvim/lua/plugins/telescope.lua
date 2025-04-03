@@ -19,6 +19,7 @@ return {
 				builtin.find_files({
 					no_ignore = false,
 					hidden = true,
+					file_ignore_patterns = { "node_modules/*" }, -- Exclude node_modules
 				})
 			end,
 			desc = "Lists files in your current working directory, respects .gitignore",
@@ -29,7 +30,8 @@ return {
 				local builtin = require("telescope.builtin")
 				builtin.live_grep()
 			end,
-			desc = "Search for a string in your current working directory and get results live as you type, respects .gitignore",
+			desc =
+			"Search for a string in your current working directory and get results live as you type, respects .gitignore",
 		},
 		{
 			"\\\\",
