@@ -87,6 +87,8 @@ bindsym $mod+minus scratchpad show
 bindsym $mod+Ctrl+Right workspace next
 bindsym $mod+Ctrl+Left workspace prev
 
+# redShift
+bindsym $mod+ctrl+r exec redshift -P -O 5000
 # Workspace names
 set $ws1 I
 set $ws2 II
