@@ -13,7 +13,7 @@ return {
 		end,
 	},
 
-	-- Now load Noice
+	-- load Noice
 	{
 		"folke/noice.nvim",
 		event = "VeryLazy",
@@ -40,6 +40,6 @@ return {
 			require("noice").setup()
 		end,
 	},
-	-- Noice
+	-- Dismiss Noice Message
 	vim.keymap.set("n", "<leader>mm", "<cmd>NoiceDismiss<CR>", { desc = "Dismiss Noice Message" }),
 }
