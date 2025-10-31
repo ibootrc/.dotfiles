@@ -8,15 +8,15 @@ return {
     },
     lazy = false,
     config = function()
-      local mason = require("mason")
-      local mason_lspconfig = require("mason-lspconfig")
+      local mason = require "mason"
+      local mason_lspconfig = require "mason-lspconfig"
       local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
       mason.setup()
-      mason_lspconfig.setup({
+      mason_lspconfig.setup {
         ensure_installed = { "lua_ls" },
         automatic_installation = true,
-      })
+      }
 
       local function on_attach(_, bufnr)
         local opts = { buffer = bufnr }
@@ -26,24 +26,20 @@ return {
         vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
       end
 
-      -- Get list of installed servers
+      -- Define a server configuration for each installed server
       local servers = mason_lspconfig.get_installed_servers()
-
       for _, server in ipairs(servers) do
         local config = {
           capabilities = capabilities,
           on_attach = on_attach,
         }
 
-        -- 🩵 Custom settings for Lua
+        -- Lua-specific settings
         if server == "lua_ls" then
           config.settings = {
             Lua = {
               runtime = { version = "LuaJIT" },
-              diagnostics = {
-                globals = { "vim" },
-                disable = { "assign-as-condition" },
-              },
+              diagnostics = { globals = { "vim" }, disable = { "assign-as-condition" } },
               workspace = {
                 checkThirdParty = false,
                 library = vim.api.nvim_get_runtime_file("", true),
@@ -53,26 +49,9 @@ return {
           }
         end
 
-        -- ✅ Use Neovim 0.11+ native LSP loader
-        local ok, lspconfig_mod = pcall(require, "lspconfig.configs")
-        local lsp = ok and vim.lsp or require("lspconfig")
-
-        -- Define server configuration
-        local server_config = vim.tbl_deep_extend("force", {}, config)
-
-        -- New API: vim.lsp.start + vim.lsp.config
-        if vim.lsp.start and vim.lsp.config then
-          local new_cfg = vim.lsp.config(server, server_config)
-          if new_cfg then
-            vim.lsp.start(new_cfg)
-          end
-        else
-          -- Backward compatibility for older nvim builds
-          local ok2, old_lsp = pcall(require, "lspconfig")
-          if ok2 and old_lsp[server] and old_lsp[server].setup then
-            old_lsp[server].setup(server_config)
-          end
-        end
+        -- Register server using the new API
+        vim.lsp.config[server] = vim.tbl_deep_extend("force", vim.lsp.config[server] or {}, config)
+        vim.lsp.enable(server)
       end
     end,
   },
