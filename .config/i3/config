@@ -185,7 +185,6 @@ bindsym $mod+Shift+l exec --no-startup-id betterlockscreen -l blur 100
 exec --no-startup-id nitrogen --restore
 exec --no-startup-id picom -b 
 exec --no-startup-id nm-applet
-exec --no-startup-id volumeicon -d hw:1 & 
 exec --no-startup-id xclip
 exec --no-startup-id udiskie -ans
 exec_always --no-startup-id autotiling
@@ -196,7 +195,7 @@ exec --no-startup-id xrandr --output DP1 --mode 1024x768
 exec --no-startup-id "nvidia-settings -l"
 exec --no-startup-id dunst
 exec --no-startup-id kanata -c ~/.config/kanata/config.kbd
-
+exec --no-startup-id pasystray  
 
 
 

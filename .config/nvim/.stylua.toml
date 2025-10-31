@@ -1,0 +1,12 @@
+
+# ~/.config/nvim/.stylua.toml
+
+# ─── Formatting ─────────────────────────────────────────────────────
+column_width = 100
+indent_type = "Spaces"
+indent_width = 2
+quote_style = "AutoPreferDouble"
+
+# ─── Function Calls ─────────────────────────────────────────────────
+call_parentheses = "None"
+collapse_simple_statement = "Never"
