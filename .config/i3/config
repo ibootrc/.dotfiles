@@ -196,6 +196,7 @@ exec --no-startup-id "nvidia-settings -l"
 exec --no-startup-id dunst
 exec --no-startup-id kanata -c ~/.config/kanata/config.kbd
 exec --no-startup-id pasystray  
+exec redshift -P -O 5000
 
 
 
