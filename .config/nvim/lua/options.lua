@@ -3,7 +3,7 @@ vim.g.mapleader = " "
 -- General options
 vim.opt.relativenumber = true
 vim.opt.number = true
-vim.opt.clipboard:append({ "unnamed", "unnamedplus" })
+vim.opt.clipboard:append { "unnamed", "unnamedplus" }
 vim.opt.shiftwidth = 2
 vim.opt.tabstop = 2
 vim.opt.cursorline = true
@@ -41,7 +41,7 @@ vim.cmd [[highlight VertSplit guifg=bg guibg=bbg]]
 vim.opt.fillchars = {
   vert = "|", -- Simple vertical line
   fold = "-", -- Simple fold separator
-  eob = " ",  -- Fix: must be a single space, not empty
+  eob = " ", -- Fix: must be a single space, not empty
   diff = "-", -- Horizontal line for diffs
 }
 -- Key mappings
@@ -55,8 +55,8 @@ vim.keymap.set("n", "<C-p>", "<cmd>lprev<CR>zz")
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv", { silent = true })
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv", { silent = true })
 vim.keymap.set("n", "<leader><leader>", function()
-	vim.cmd "so"
-	print "Config Reloadeed!"
+  vim.cmd "so"
+  print "Config Reloadeed!"
 end)
 
 -- Use CTRL+<hjkl> to switch between windows
@@ -67,13 +67,13 @@ vim.keymap.set("n", "<C-k>", "<C-w><C-k>", { desc = "Move focus to the upper win
 
 -- Move help windows to a vertical split on the right
 vim.api.nvim_create_autocmd("BufWinEnter", {
-	group = vim.api.nvim_create_augroup("HelpWindowRight", {}),
-	pattern = "help",
-	callback = function()
-		if vim.bo.filetype == "help" then
-			vim.cmd("wincmd L")
-		end
-	end,
+  group = vim.api.nvim_create_augroup("HelpWindowRight", {}),
+  pattern = "help",
+  callback = function()
+    if vim.bo.filetype == "help" then
+      vim.cmd "wincmd L"
+    end
+  end,
 })
 -- Configure how new splits should be opened
 vim.opt.splitright = true
@@ -81,30 +81,29 @@ vim.opt.splitbelow = true
 
 -- Highlight when yanking (copying) text
 vim.api.nvim_create_autocmd("TextYankPost", {
-	desc = "Highlight when yanking (copying) text",
-	group = vim.api.nvim_create_augroup("kickstart-highlight-yank", { clear = true }),
-	callback = function()
-		vim.highlight.on_yank()
-	end,
+  desc = "Highlight when yanking (copying) text",
+  group = vim.api.nvim_create_augroup("kickstart-highlight-yank", { clear = true }),
+  callback = function()
+    vim.highlight.on_yank()
+  end,
 })
 
 -- Set cursor line number color
 vim.api.nvim_create_autocmd("BufWinEnter", {
-	callback = function()
-		vim.api.nvim_set_hl(0, "CursorLineNr", { fg = "#A8D8E6", bold = true })
-	end,
+  callback = function()
+    vim.api.nvim_set_hl(0, "CursorLineNr", { fg = "#D17B9A", bold = true })
+  end,
 })
-
 
 -- Adjust number width and sign column for help pages
 vim.api.nvim_create_autocmd("FileType", {
-	pattern = "help",
-	callback = function()
-		vim.wo.number = true            -- Enable line numbers for help files
-		vim.wo.relativenumber = false   -- Disable relative numbers for help files
-		vim.wo.numberwidth = 2          -- Reduce number column width
-		vim.wo.signcolumn = "no"        -- Remove sign column
-	end,
+  pattern = "help",
+  callback = function()
+    vim.wo.number = true -- Enable line numbers for help files
+    vim.wo.relativenumber = false -- Disable relative numbers for help files
+    vim.wo.numberwidth = 2 -- Reduce number column width
+    vim.wo.signcolumn = "no" -- Remove sign column
+  end,
 })
 -- Disable the right-click popup menu
 vim.api.nvim_set_keymap("n", "<RightMouse>", "<NOP>", { noremap = true, silent = true })
