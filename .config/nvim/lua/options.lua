@@ -25,14 +25,6 @@ vim.opt.undodir = os.getenv "HOME" .. "/.vim/undodir"
 vim.opt.undofile = true
 vim.keymap.set("n", "s", "<Nop>", { noremap = true, silent = true })
 
--- Highlight settingsvim.cmd([[highlight LineNr guibg=bg]])
-vim.cmd [[
-augroup CustomCursorLineHighlight
-autocmd!
-autocmd VimEnter * highlight CursorLine guifg=#A8D8E6 guibg=#4a4a4a
-augroup ENDD
-]]
-
 -- UI and Visual Customizations
 -- Customize the appearance of fold column, vertical splits, and fill characters
 vim.opt.foldcolumn = "0"
@@ -85,13 +77,6 @@ vim.api.nvim_create_autocmd("TextYankPost", {
   group = vim.api.nvim_create_augroup("kickstart-highlight-yank", { clear = true }),
   callback = function()
     vim.highlight.on_yank()
-  end,
-})
-
--- Set cursor line number color
-vim.api.nvim_create_autocmd("BufWinEnter", {
-  callback = function()
-    vim.api.nvim_set_hl(0, "CursorLineNr", { fg = "#D17B9A", bold = true })
   end,
 })
 
