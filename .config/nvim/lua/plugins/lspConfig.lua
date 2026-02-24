@@ -4,13 +4,12 @@ return {
     dependencies = {
       "williamboman/mason.nvim",
       "williamboman/mason-lspconfig.nvim",
-      "hrsh7th/cmp-nvim-lsp",
     },
-    lazy = false,
+    lazy = true, -- lazy load LSP config to improve startup
+    event = { "BufReadPre", "BufNewFile" }, -- start LSP only when buffer is opened
     config = function()
       local mason = require "mason"
       local mason_lspconfig = require "mason-lspconfig"
-      local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
       mason.setup()
       mason_lspconfig.setup {
@@ -18,7 +17,7 @@ return {
         automatic_installation = true,
       }
 
-      local function on_attach(_, bufnr)
+      local on_attach = function(_, bufnr)
         local opts = { buffer = bufnr }
         vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
         vim.keymap.set("n", "<leader>gd", vim.lsp.buf.definition, opts)
@@ -26,32 +25,39 @@ return {
         vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
       end
 
-      -- Define a server configuration for each installed server
-      local servers = mason_lspconfig.get_installed_servers()
+      local servers = { "lua_ls" }
+
       for _, server in ipairs(servers) do
         local config = {
-          capabilities = capabilities,
           on_attach = on_attach,
+          flags = { debounce_text_changes = 150 }, -- smaller debounce = faster response
         }
 
-        -- Lua-specific settings
         if server == "lua_ls" then
           config.settings = {
             Lua = {
               runtime = { version = "LuaJIT" },
-              diagnostics = { globals = { "vim" }, disable = { "assign-as-condition" } },
+              diagnostics = { globals = { "vim" } },
               workspace = {
                 checkThirdParty = false,
-                library = vim.api.nvim_get_runtime_file("", true),
+                library = vim.api.nvim_get_runtime_file("", false),
+                maxPreload = 500, -- limit number of files indexed at startup
+                preloadFileSize = 50, -- skip large files
+                ignoreDir = { "node_modules", ".git", "packer_compiled.lua" }, -- skip heavy folders
               },
               telemetry = { enable = false },
             },
           }
         end
 
-        -- Register server using the new API
-        vim.lsp.config[server] = vim.tbl_deep_extend("force", vim.lsp.config[server] or {}, config)
-        vim.lsp.enable(server)
+        -- Lazy attach: only attach when filetype matches
+        vim.api.nvim_create_autocmd("FileType", {
+          pattern = { "lua" }, -- only for Lua files
+          callback = function()
+            vim.lsp.config(server).setup(config)
+            vim.lsp.enable(server)
+          end,
+        })
       end
     end,
   },
