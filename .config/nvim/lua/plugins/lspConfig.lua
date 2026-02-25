@@ -1,9 +1,9 @@
 return {
   "neovim/nvim-lspconfig",
   dependencies = {
+    "saghen/blink.cmp",
     { "mason-org/mason.nvim", opts = {} },
-    { "j-hui/fidget.nvim", opts = {} }, -- optional LSP status
-    "saghen/blink.cmp", -- completion integration
+    { "b0o/schemastore.nvim", lazy = true },
   },
   config = function()
     local capabilities = require("blink.cmp").get_lsp_capabilities()
@@ -72,7 +72,38 @@ return {
           },
         },
       },
-
+      -- CSS / SCSS
+      cssls = {
+        settings = {
+          css = { validate = true },
+          scss = { validate = true },
+          less = { validate = true },
+        },
+        -- TailwindCSS
+        tailwindcss = {
+          settings = {
+            tailwindCSS = {
+              includeLanguages = {
+                ["typescriptreact"] = "html",
+                ["javascriptreact"] = "html",
+                ["html"] = "html",
+              },
+              experimental = {
+                classRegex = { 'className="([^"]*)"' },
+              },
+            },
+          },
+        },
+        -- JSON
+        jsonls = {
+          settings = {
+            json = {
+              schemas = require("schemastore").json.schemas(),
+              validate = { enable = true },
+            },
+          },
+        },
+      },
       -- TypeScript / JavaScript
       ts_ls = {
         init_options = {
