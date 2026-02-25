@@ -1,42 +1,49 @@
 return {
-  {
-    "saghen/blink.cmp",
-    version = "1.*",
-    dependencies = {
-      "rafamadriz/friendly-snippets",
+  "saghen/blink.cmp",
+  event = "InsertEnter", -- lazy load on first insert
+  version = "1.*",
+  dependencies = {
+    {
+      "L3MON4D3/LuaSnip",
+      version = "2.*",
+      build = (function()
+        if vim.fn.has "win32" == 1 or vim.fn.executable "make" == 0 then
+          return
+        end
+        return "make install_jsregexp"
+      end)(),
+      dependencies = {
+        {
+          "rafamadriz/friendly-snippets",
+          config = function()
+            -- Lazy-load only relevant languages
+            require("luasnip.loaders.from_vscode").lazy_load {
+              include = { "html", "javascript", "lua" },
+            }
+          end,
+        },
+      },
+      opts = {},
     },
-    config = function()
-      local blink = require "blink.cmp"
+  },
+  opts = {
+    keymap = {
+      preset = "default",
+      ["<CR>"] = { "select_and_accept", "fallback" }, -- optimized Enter
+    },
 
-      blink.setup {
-        keymap = {
-          insert = {
-            ["<C-Space>"] = "trigger_completion",
-            ["<CR>"] = "confirm_completion",
-            ["<C-e>"] = "abort_completion",
-            ["<C-b>"] = "scroll_docs_up",
-            ["<C-f>"] = "scroll_docs_down",
-          },
-        },
-        sources = {
-          providers = {
-            lsp = {},
-            snippets = {
-              opts = {
-                friendly_snippets = true,
-                search_paths = { vim.fn.stdpath "config" .. "/snippets" },
-              },
-            },
-            buffer = {},
-          },
-        },
-        completion = {
-          documentation = { auto_show = true },
-        },
-        fuzzy = {
-          implementation = "prefer_rust_with_warning",
-        },
-      }
-    end,
+    completion = {
+      documentation = { auto_show = false, auto_show_delay_ms = 500 }, -- less overhead
+    },
+
+    sources = {
+      default = { "lsp", "path", "snippets" },
+    },
+
+    snippets = { preset = "luasnip" },
+
+    fuzzy = { implementation = "lua" }, -- fast Lua fuzzy matcher
+
+    signature = { enabled = false }, -- optional: enable manually if needed
   },
 }
