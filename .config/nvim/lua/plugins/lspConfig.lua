@@ -39,21 +39,64 @@ return {
 
     -- Servers definition
     local servers = {
+      -- Lua (your optimized setup, preserved)
       lua_ls = {
         settings = {
           Lua = {
-            runtime = { version = "LuaJIT", path = { "lua/?.lua", "lua/?/init.lua" } },
+            runtime = {
+              version = "LuaJIT",
+              path = { "lua/?.lua", "lua/?/init.lua" },
+            },
             workspace = {
-              library = { vim.fn.stdpath "config", vim.fn.getcwd() },
+              library = {
+                vim.fn.stdpath "config",
+                vim.fn.getcwd(),
+              },
               checkThirdParty = false,
             },
+            telemetry = { enable = false },
           },
         },
       },
-      html = {},
-      ts_ls = {},
-    }
 
+      -- HTML (correct formatter control)
+      html = {
+        init_options = {
+          provideFormatter = false, -- official way to disable formatting
+        },
+        settings = {
+          html = {
+            hover = { documentation = true, references = true },
+            validate = true,
+            suggest = { html5 = true },
+          },
+        },
+      },
+
+      -- TypeScript / JavaScript
+      ts_ls = {
+        init_options = {
+          maxTsServerMemory = 4096,
+          disableAutomaticTypingAcquisition = true,
+        },
+        settings = {
+          typescript = {
+            format = { enable = false },
+            inlayHints = {
+              includeInlayParameterNameHints = "none",
+              includeInlayVariableTypeHints = false,
+              includeInlayFunctionParameterTypeHints = false,
+            },
+            preferences = {
+              importModuleSpecifierPreference = "relative",
+            },
+          },
+          javascript = {
+            format = { enable = false },
+          },
+        },
+      },
+    }
     -- Setup servers using the new API
     for name, opts in pairs(servers) do
       opts =
