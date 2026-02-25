@@ -16,7 +16,7 @@ return {
       end
       map("R", vim.lsp.buf.rename, "Rename")
       map("gd", vim.lsp.buf.definition, "Goto Definition")
-
+      map("gr", vim.lsp.buf.references, "References")
       -- Document highlight only for small buffers
       if client.supports_method "textDocument/documentHighlight" then
         if vim.api.nvim_buf_line_count(bufnr) < 5000 then
