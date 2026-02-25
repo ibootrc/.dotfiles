@@ -14,10 +14,8 @@ return {
         mode = mode or "n"
         vim.keymap.set(mode, keys, func, { buffer = bufnr, desc = "LSP: " .. desc })
       end
-
-      map("grn", vim.lsp.buf.rename, "Rename")
-      map("gra", vim.lsp.buf.code_action, "Code Action", { "n", "x" })
-      map("grD", vim.lsp.buf.declaration, "Goto Declaration")
+      map("R", vim.lsp.buf.rename, "Rename")
+      map("gd", vim.lsp.buf.definition, "Goto Definition")
 
       -- Document highlight only for small buffers
       if client.supports_method "textDocument/documentHighlight" then
