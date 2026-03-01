@@ -1,11 +1,14 @@
-# Path to Zsh installation
+# -----------------------------
+# CORE ZSH SETUP
+# -----------------------------
 export ZSH="$HOME/.zsh"
-
-# Theme
 export ZSH_THEME="robbyrussell"
 
-# No immediate plugins loaded (lazy-load only)
-export plugins=()
+# Plugins loaded immediately for functionality
+export plugins=(
+  zsh-autosuggestions
+  zsh-syntax-highlighting
+)
 
 # Source Oh My Zsh core
 source $ZSH/zsh.sh
@@ -13,7 +16,9 @@ source $ZSH/zsh.sh
 # Preferred editor
 export EDITOR='nvim'
 
-# Aliases
+# -----------------------------
+# ALIASES
+# -----------------------------
 alias update="sudo pacman -Syy --noconfirm"
 alias install="sudo pacman -S"
 alias remove="sudo pacman -Rns"
@@ -25,7 +30,9 @@ alias ed='sudoedit'
 alias tm='tmux'
 alias air="$HOME/go/bin/air"
 
-# LESS colors
+# -----------------------------
+# LESS COLORS
+# -----------------------------
 export LESS_TERMCAP_mb=$'\e[1;34m'
 export LESS_TERMCAP_md=$'\e[1;34m'
 export LESS_TERMCAP_so=$'\e[01;44;37m'
@@ -38,57 +45,37 @@ export GROFF_NO_SGR=1
 # PATH additions
 export PATH=$PATH:/usr/local/go/bin
 
-# Key bindings
+# -----------------------------
+# AUTOSUGGESTIONS KEYBIND
+# -----------------------------
 bindkey -r '^j'
 bindkey '^j' autosuggest-accept
 
-# XDG runtime dir
+# -----------------------------
+# XDG RUNTIME DIR
+# -----------------------------
 export XDG_RUNTIME_DIR=/run/user/1000
 
 # -----------------------------
-# Lazy-load slow features
+# OPTIONAL HEAVY TOOLS (LAZY-LOAD)
 # -----------------------------
-
 autoload -Uz add-zsh-hook
 
-# 1. zsh-autosuggestions
-load_autosuggestions() {
-  unset -f load_autosuggestions
-  [ -f "$ZSH/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh" ] && \
-    source "$ZSH/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh"
-}
-add-zsh-hook precmd load_autosuggestions  # load before first prompt
-
-# 2. zsh-syntax-highlighting
-load_syntax_highlighting() {
-  unset -f load_syntax_highlighting
-  [ -f "$ZSH/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ] && \
-    source "$ZSH/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
-}
-add-zsh-hook precmd load_syntax_highlighting
-
-# 3. fzf keybindings
+# fzf
 load_fzf() {
   unset -f load_fzf
   [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 }
 add-zsh-hook precmd load_fzf
 
-# 4. NVM lazy-load
+# NVM
 nvm() {
   unset -f nvm
   export NVM_DIR="$HOME/.nvm"
-  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-  [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+  [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
+  [ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"
   nvm "$@"
 }
-# Preload Rofi desktop cache for instant drun launch
-(rofi -dump-config > /dev/null 2>&1 &)
-# -----------------------------
-# Optional: other slow configs
-# -----------------------------
-# Uncomment if using fzf completion in commands
-# bindkey '^T' fzf-file-widget
-# bindkey '^R' fzf-history-widget
 
-# End of optimized .zshrc
+# Preload Rofi desktop cache
+(rofi -dump-config > /dev/null 2>&1 &)

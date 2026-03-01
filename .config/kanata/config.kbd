@@ -4,7 +4,7 @@
  )
 
 (defsrc
- caps f g k l
+ caps
  )
 (defvar
  tap-time 150
@@ -13,12 +13,8 @@
 
 	(defalias
 	 escctrl (tap-hold $tap-time $hold-time esc lctl)
-	 f (multi f24 (tap-hold $tap-time $hold-time f lmet))
-	 g (multi f24 (tap-hold $tap-time $hold-time g lsft))
-	 k (multi f24 (tap-hold $tap-time $hold-time k rsft))
-	 l (multi f24 (tap-hold $tap-time $hold-time l rctrl))
 	)
 
 	(deflayer base
-	 @escctrl @f @g @k @l
+	 @escctrl
 	)
