@@ -12,10 +12,6 @@ return {
           vim.g.no_plugin_maps = true -- disable built-in mappings
         end,
       },
-      {
-        "nvim-treesitter/nvim-treesitter-context",
-        opts = { max_lines = 4, multiline_threshold = 2 },
-      },
     },
     config = function()
       -- Treesitter core

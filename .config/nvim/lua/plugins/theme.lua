@@ -10,7 +10,7 @@ return {
       vim.o.termguicolors = true
 
       require("everforest").setup {
-        transparent_background_level = 1,
+        transparent_background_level = 2,
 
         -- 1. Neutralize green-tinted background
         colours_override = function(palette)

@@ -1,5 +1,4 @@
 return {
-  -- Twilight.nvim
   {
     "folke/twilight.nvim",
     lazy = false,
