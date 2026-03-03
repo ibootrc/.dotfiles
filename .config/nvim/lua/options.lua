@@ -26,6 +26,7 @@ vim.opt.undofile = true
 vim.keymap.set("n", "s", "<Nop>", { noremap = true, silent = true })
 
 -- UI and Visual Customizations
+
 -- Customize the appearance of fold column, vertical splits, and fill characters
 vim.opt.foldcolumn = "0"
 vim.cmd [[highlight FoldColumn guibg=bbg]]
