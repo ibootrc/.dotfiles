@@ -211,11 +211,11 @@ return {
     end,
   },
 
-  -- Noice config
+  -- Noice config with blink.cmp <CR> commit in cmdline
   {
     "folke/noice.nvim",
     event = "VeryLazy",
-    dependencies = { "MunifTanjim/nui.nvim", "rcarriga/nvim-notify" },
+    dependencies = { "MunifTanjim/nui.nvim", "rcarriga/nvim-notify", "saghen/blink.cmp" },
     opts = {
       views = {
         cmdline_popup = {
@@ -228,11 +228,14 @@ return {
       notify = { enabled = true },
     },
     config = function()
-      require("noice").setup()
-      -- Keymap for dismissing messages
+      local noice = require "noice"
+      noice.setup()
+
+      -- Dismiss messages keymap
       vim.keymap.set("n", "<leader>mm", "<cmd>NoiceDismiss<CR>", { desc = "Dismiss Noice Message" })
     end,
   },
+
   -- null-ls config
   {
     "nvimtools/none-ls.nvim",
