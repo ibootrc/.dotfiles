@@ -27,6 +27,8 @@ return {
           hl.IncSearch = { bg = palette.bg_visual, fg = palette.fg }
           hl.CurSearch = { bg = palette.bg_visual, fg = palette.fg }
           hl.Substitute = { bg = palette.bg_visual, fg = palette.fg }
+          -- Noice virtual text highlight
+          hl.NoiceVirtualText = { bg = palette.bg_visual, fg = palette.fg }
 
           -- Cursor line
           hl.CursorLine = { bg = "#5C5457" }

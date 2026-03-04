@@ -152,7 +152,7 @@ return {
           initial_mode = "normal",
           mappings = {
             n = {
-              ["<CR"] = require("telescope-undo.actions").restore,
+              ["<CR>"] = require("telescope-undo.actions").restore,
               ["y"] = require("telescope-undo.actions").yank_additions,
               ["Y"] = require("telescope-undo.actions").yank_deletions,
             },
@@ -222,6 +222,13 @@ return {
           position = { row = "50%", col = "50%" },
           size = { width = "90%", height = "auto" },
           lsp_doc_border = true,
+          format = function(item)
+            -- Add 3-space margin between match and virtual text
+            if item.virtual_text then
+              item.virtual_text = "    | " .. item.virtual_text
+            end
+            return item
+          end,
         },
       },
       presets = { command_palette = true, bottom_search = true },
