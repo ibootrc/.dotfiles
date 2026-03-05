@@ -29,8 +29,10 @@ alias vz='v ~/.zshrc'
 alias ed='sudoedit'
 alias tm='tmux'
 alias air="$HOME/go/bin/air"
-#alias gk="cd .. && pwd | awk -F'/' '{print \"\033[48;5;24;37m /\" \$(NF-1) \"/\" \$NF \" \033[0m\"}'"
 alias gk="cd .. && pwd | awk -F'/' '{print \"\033[48;5;24;38;2;190;177;153m /\" \$(NF-1) \"/\" \$NF \" \033[0m\"}'"
+alias add="git add -A"
+alias co='git commit -m'
+alias pu='git push'
 
 
 # -----------------------------
