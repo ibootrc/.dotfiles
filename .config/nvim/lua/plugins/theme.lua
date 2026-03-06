@@ -9,70 +9,54 @@ return {
     end,
   },
 
-  --- lualine configuration
   {
     "nvim-lualine/lualine.nvim",
     config = function()
-      local lualine = require "lualine"
+      local p = require "archie.palette"
 
-      -- Minimal palette (only used colors)
-      local palette = {
-        bg0 = "NONE",
-        bg1 = "NONE",
-        none = "NONE",
+      -- We use p.bg_highlight (#34393E) to match your CursorLine exactly
+      local cursorline_bg = p.bg_highlight
 
-        fg = "#C9BEC2",
-        fgline = "#E4F0FB",
-
-        grey = "#5C5457",
-        light_grey = "#87757C",
-
-        blue = "#1b668f",
-        orange = "#C5663F",
-        red = "#D17B9A",
-        purple = "#7060eb",
-      }
-
-      -- Custom lualine theme
-      local vith_lualine = {
+      local my_archie_theme = {
         normal = {
-          a = { fg = palette.bg0, bg = palette.grey, gui = "bold" },
-          b = { fg = palette.fg, bg = palette.bg1 },
-          c = { fg = palette.grey, bg = palette.none },
+          a = { fg = p.white, bg = p.blue_deep, gui = "bold" },
+          b = { fg = p.fg, bg = cursorline_bg }, -- Matches CursorLine
+          c = { fg = p.fg, bg = cursorline_bg }, -- Matches CursorLine
         },
         insert = {
-          a = { fg = palette.fgline, bg = palette.blue, gui = "bold" },
-          b = { fg = palette.fg, bg = palette.bg1 },
-          c = { fg = palette.grey, bg = palette.none },
+          a = { fg = p.white, bg = p.blue, gui = "bold" },
+          b = { fg = p.fg, bg = cursorline_bg },
+          c = { fg = p.fg, bg = cursorline_bg },
         },
         visual = {
-          a = { fg = palette.bg0, bg = palette.orange, gui = "bold" },
-          b = { fg = palette.fg, bg = palette.bg1 },
-          c = { fg = palette.grey, bg = palette.none },
+          a = { fg = p.white, bg = p.orange, gui = "bold" },
+          b = { fg = p.fg, bg = cursorline_bg },
+          c = { fg = p.fg, bg = cursorline_bg },
         },
         replace = {
-          a = { fg = palette.bg0, bg = palette.red, gui = "bold" },
-          b = { fg = palette.fg, bg = palette.bg1 },
-          c = { fg = palette.grey, bg = palette.none },
+          a = { fg = p.white, bg = p.red, gui = "bold" },
+          b = { fg = p.fg, bg = cursorline_bg },
+          c = { fg = p.fg, bg = cursorline_bg },
         },
         command = {
-          a = { fg = palette.bg0, bg = palette.purple, gui = "bold" },
-          b = { fg = palette.fg, bg = palette.bg1 },
-          c = { fg = palette.grey, bg = palette.none },
+          a = { fg = p.white, bg = p.purple, gui = "bold" },
+          b = { fg = p.fg, bg = cursorline_bg },
+          c = { fg = p.fg, bg = cursorline_bg },
         },
         inactive = {
-          a = { fg = palette.light_grey, bg = palette.bg1, gui = "bold" },
-          b = { fg = palette.light_grey, bg = palette.bg1 },
-          c = { fg = palette.light_grey, bg = palette.none },
+          a = { fg = p.fg_alt, bg = p.none },
+          b = { fg = p.fg_alt, bg = p.none },
+          c = { fg = p.fg_alt, bg = p.none },
         },
       }
 
-      lualine.setup {
+      require("lualine").setup {
         options = {
           icons_enabled = true,
-          theme = vith_lualine,
+          theme = my_archie_theme,
           component_separators = "",
-          section_separators = "",
+          section_separators = "", -- Removed separators for a seamless "Bar" look
+          globalstatus = true,
         },
       }
     end,

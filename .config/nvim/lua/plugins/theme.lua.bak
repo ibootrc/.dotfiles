@@ -110,7 +110,7 @@ return {
           c = { fg = palette.grey, bg = palette.none },
         },
         command = {
-          a = { fg = palette.bg0, bg = palette.purple, gui = "bold" },
+          a = { fg = palette.bg0, bg = palette.light_grey, gui = "bold" },
           b = { fg = palette.fg, bg = palette.bg1 },
           c = { fg = palette.grey, bg = palette.none },
         },
