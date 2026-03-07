@@ -2,7 +2,20 @@ return {
   "neovim/nvim-lspconfig",
   dependencies = {
     "saghen/blink.cmp",
-    { "mason-org/mason.nvim", opts = {} },
+    -- Mason with Rounded UI and Premium Icons
+    {
+      "williamboman/mason.nvim",
+      opts = {
+        ui = {
+          border = "rounded",
+          icons = {
+            package_installed = "✓",
+            package_pending = "➜",
+            package_uninstalled = "✗",
+          },
+        },
+      },
+    },
     { "b0o/schemastore.nvim", lazy = true },
   },
   config = function()
@@ -17,6 +30,7 @@ return {
       map("gr", vim.lsp.buf.rename, "Rename")
       map("gd", vim.lsp.buf.definition, "Goto Definition")
       map("gr", vim.lsp.buf.references, "References")
+
       -- Document highlight only for small buffers
       if client.supports_method "textDocument/documentHighlight" then
         if vim.api.nvim_buf_line_count(bufnr) < 5000 then
@@ -37,7 +51,6 @@ return {
 
     -- Servers definition
     local servers = {
-      -- Lua (your optimized setup, preserved)
       lua_ls = {
         settings = {
           Lua = {
@@ -56,11 +69,9 @@ return {
           },
         },
       },
-
-      -- HTML (correct formatter control)
       html = {
         init_options = {
-          provideFormatter = false, -- official way to disable formatting
+          provideFormatter = false,
         },
         settings = {
           html = {
@@ -70,39 +81,35 @@ return {
           },
         },
       },
-      -- CSS / SCSS
       cssls = {
         settings = {
           css = { validate = true },
           scss = { validate = true },
           less = { validate = true },
         },
-        -- TailwindCSS
-        tailwindcss = {
-          settings = {
-            tailwindCSS = {
-              includeLanguages = {
-                ["typescriptreact"] = "html",
-                ["javascriptreact"] = "html",
-                ["html"] = "html",
-              },
-              experimental = {
-                classRegex = { 'className="([^"]*)"' },
-              },
+      },
+      tailwindcss = {
+        settings = {
+          tailwindCSS = {
+            includeLanguages = {
+              ["typescriptreact"] = "html",
+              ["javascriptreact"] = "html",
+              ["html"] = "html",
             },
-          },
-        },
-        -- JSON
-        jsonls = {
-          settings = {
-            json = {
-              schemas = require("schemastore").json.schemas(),
-              validate = { enable = true },
+            experimental = {
+              classRegex = { 'className="([^"]*)"' },
             },
           },
         },
       },
-      -- TypeScript / JavaScript
+      jsonls = {
+        settings = {
+          json = {
+            schemas = require("schemastore").json.schemas(),
+            validate = { enable = true },
+          },
+        },
+      },
       ts_ls = {
         init_options = {
           maxTsServerMemory = 4096,
@@ -126,12 +133,17 @@ return {
         },
       },
     }
-    -- Setup servers using the new API
+
+    -- Setup servers
     for name, opts in pairs(servers) do
       opts =
         vim.tbl_deep_extend("force", { on_attach = on_attach, capabilities = capabilities }, opts)
       vim.lsp.config(name, opts)
       vim.lsp.enable(name)
     end
+
+    -- Glass UI: Global Float and Mason Border colors
+    vim.api.nvim_set_hl(0, "FloatBorder", { fg = "#34393e", bg = "NONE" })
+    vim.api.nvim_set_hl(0, "MasonBorder", { fg = "#34393e", bg = "NONE" })
   end,
 }
