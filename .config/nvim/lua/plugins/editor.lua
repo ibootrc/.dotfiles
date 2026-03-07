@@ -219,8 +219,8 @@ return {
     opts = {
       views = {
         cmdline_popup = {
-          position = { row = "65%", col = "50%" },
-          size = { width = "50%", height = "auto" },
+          position = { row = "35%", col = "50%" },
+          size = { width = "40%", height = "auto" },
           lsp_doc_border = true,
         },
       },
