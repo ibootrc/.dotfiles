@@ -1,55 +1,55 @@
 return {
-  {
-    "folke/flash.nvim",
-    keys = { "s", "S", "r", "rr", "<c-s>" },
-    opts = {
-      highlight = {
-        backdrop = true,
-        matches = "IncSearch",
-        priority = 5000,
-      },
-      modes = {
-        char = { enabled = true, jump_labels = false },
-        search = { enabled = true },
-        treesitter = { enabled = false },
-      },
-      search = {
-        incremental = true,
-        mode = "current_line",
-      },
-      jump = {
-        autojump = false,
-      },
-      max_length = 5000,
+  "folke/flash.nvim",
+  -- Performance: 'keys' handles lazy-loading perfectly
+  keys = {
+    {
+      "s",
+      mode = { "n", "x", "o" },
+      function()
+        require("flash").jump()
+      end,
+      desc = "Flash",
+      nowait = true,
     },
-    config = function(_, opts)
-      local flash = require "flash"
-      flash.setup(opts)
-
-      -- Make Flash labels more readable without changing other highlights
-      vim.api.nvim_set_hl(0, "FlashLabel", {
-        fg = "#ffffff", -- bright color for labels
-        bg = nil, -- keep background as-is
-        bold = true,
-        underline = false,
-        reverse = false,
-        italic = false,
-      })
-
-      local mappings = {
-        { "s", flash.jump, "Flash" },
-        { "S", flash.treesitter, "Flash Treesitter" },
-        { "r", flash.remote, "Remote Flash" },
-        { "rr", flash.treesitter_search, "Treesitter Search" },
-        { "<c-s>", flash.toggle, "Toggle Flash Search" },
-      }
-
-      for _, m in ipairs(mappings) do
-        vim.keymap.set({ "n", "x", "o" }, m[1], m[2], {
-          desc = m[3],
-          silent = true,
-        })
-      end
-    end,
+    {
+      "S",
+      mode = { "n", "x", "o" },
+      function()
+        require("flash").treesitter()
+      end,
+      desc = "Flash Treesitter",
+      nowait = true,
+    },
+    {
+      "r",
+      mode = "o",
+      function()
+        require("flash").remote()
+      end,
+      desc = "Remote Flash",
+    },
+    -- Optimization: Use 'R' instead of 'rr' to avoid wait-time for the second 'r'
+    {
+      "R",
+      mode = { "n", "x", "o" },
+      function()
+        require("flash").treesitter_search()
+      end,
+      desc = "Treesitter Search",
+    },
   },
+  opts = {
+    highlight = { backdrop = true, matches = "IncSearch", priority = 5000 },
+    modes = {
+      char = { enabled = true, jump_labels = false },
+      search = { enabled = true },
+      treesitter = { enabled = false },
+    },
+    search = { incremental = true, mode = "current_line" },
+    jump = { autojump = false },
+  },
+  config = function(_, opts)
+    require("flash").setup(opts)
+    vim.api.nvim_set_hl(0, "FlashLabel", { fg = "#E6E6E6", bold = true })
+  end,
 }

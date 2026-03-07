@@ -1,20 +1,11 @@
--- lua/plugins/treesitter.lua
 return {
   {
     "nvim-treesitter/nvim-treesitter",
-    lazy = false,
+    -- Performance: Load only when opening a file
+    event = { "BufReadPost", "BufNewFile" },
     build = ":TSUpdate",
-    dependencies = {
-      {
-        "nvim-treesitter/nvim-treesitter-textobjects",
-        lazy = false,
-        init = function()
-          vim.g.no_plugin_maps = true -- disable built-in mappings
-        end,
-      },
-    },
+    dependencies = { "nvim-treesitter/nvim-treesitter-textobjects" },
     config = function()
-      -- Treesitter core
       require("nvim-treesitter.configs").setup {
         ensure_installed = {
           "lua",
@@ -35,52 +26,59 @@ return {
             init_selection = "<C-space>",
             node_incremental = "<C-space>",
             node_decremental = "<BS>",
-            scope_incremental = false,
           },
         },
         textobjects = {
-          select = { enable = true, lookahead = false, include_surrounding_whitespace = false },
+          select = { enable = true, lookahead = true },
           move = { enable = true, set_jumps = true },
         },
       }
 
-      -- Selection keymaps (explicit)
+      -- Cache modules for speed
       local ts_select = require "nvim-treesitter-textobjects.select"
-      vim.keymap.set({ "x", "o" }, "af", function()
-        ts_select.select_textobject("@function.outer", "textobjects")
-      end)
-      vim.keymap.set({ "x", "o" }, "if", function()
-        ts_select.select_textobject("@function.inner", "textobjects")
-      end)
-      vim.keymap.set({ "x", "o" }, "ac", function()
-        ts_select.select_textobject("@class.outer", "textobjects")
-      end)
-      vim.keymap.set({ "x", "o" }, "ic", function()
-        ts_select.select_textobject("@class.inner", "textobjects")
-      end)
-      vim.keymap.set({ "x", "o" }, "as", function()
-        ts_select.select_textobject("@local.scope", "locals")
-      end)
-
-      -- Move keymaps (minimal)
       local ts_move = require "nvim-treesitter-textobjects.move"
+      local ts_repeat = require "nvim-treesitter-textobjects.repeatable_move"
+
+      -- 1. SELECTION MAPPINGS (Visual 'x' and Operator-pending 'o')
+      -- Use nowait = true so 'af' and 'if' bypass the 200ms timeout lag
+      local select_maps = {
+        ["af"] = "@function.outer",
+        ["if"] = "@function.inner",
+        ["ac"] = "@class.outer",
+        ["ic"] = "@class.inner",
+      }
+
+      for key, query in pairs(select_maps) do
+        vim.keymap.set({ "x", "o" }, key, function()
+          ts_select.select_textobject(query)
+        end, { nowait = true, silent = true })
+      end
+
+      -- 2. MOVE MAPPINGS (Optimized for 200ms timeout)
+      -- Single character suffixes (f, c) are faster than double-tapping (]], [[)
       vim.keymap.set({ "n", "x", "o" }, "]f", function()
-        ts_move.goto_next_start("@function.outer", "textobjects")
+        ts_move.goto_next_start "@function.outer"
       end)
       vim.keymap.set({ "n", "x", "o" }, "[f", function()
-        ts_move.goto_previous_start("@function.outer", "textobjects")
+        ts_move.goto_previous_start "@function.outer"
       end)
-      vim.keymap.set({ "n", "x", "o" }, "][", function()
-        ts_move.goto_next_start("@class.outer", "textobjects")
+      vim.keymap.set({ "n", "x", "o" }, "]c", function()
+        ts_move.goto_next_start "@class.outer"
       end)
-      vim.keymap.set({ "n", "x", "o" }, "[[", function()
-        ts_move.goto_previous_start("@class.outer", "textobjects")
+      vim.keymap.set({ "n", "x", "o" }, "[c", function()
+        ts_move.goto_previous_start "@class.outer"
       end)
 
-      -- Repeatable movements
-      local ts_repeat = require "nvim-treesitter-textobjects.repeatable_move"
+      -- 3. REPEATABLE MOVEMENTS
+      -- After one jump, spam ; or , to keep moving
       vim.keymap.set({ "n", "x", "o" }, ";", ts_repeat.repeat_last_move_next)
       vim.keymap.set({ "n", "x", "o" }, ",", ts_repeat.repeat_last_move_previous)
+
+      -- Sync standard f/t movements with the same ;/, repeat logic
+      vim.keymap.set({ "n", "x", "o" }, "f", ts_repeat.builtin_f_expr, { expr = true })
+      vim.keymap.set({ "n", "x", "o" }, "F", ts_repeat.builtin_F_expr, { expr = true })
+      vim.keymap.set({ "n", "x", "o" }, "t", ts_repeat.builtin_t_expr, { expr = true })
+      vim.keymap.set({ "n", "x", "o" }, "T", ts_repeat.builtin_T_expr, { expr = true })
     end,
   },
 }

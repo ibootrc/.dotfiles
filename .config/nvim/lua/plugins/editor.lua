@@ -64,7 +64,7 @@ return {
         desc = "Current buffer search",
       },
       {
-        "sf",
+        ";a",
         function()
           local telescope = require "telescope"
           local function telescope_buffer_dir()
@@ -166,9 +166,9 @@ return {
       telescope.load_extension "undo"
 
       -- Highlights inside config
-      vim.api.nvim_set_hl(0, "TelescopeSelection", { fg = "#A8D8E6", bg = "#4a4a4a", bold = true })
-      vim.api.nvim_set_hl(0, "TelescopeMatching", { fg = "#FFB86C" })
-      vim.api.nvim_set_hl(0, "TelescopePromptPrefix", { fg = "#56B6C2" })
+      --  vim.api.nvim_set_hl(0, "TelescopeSelection", { fg = "#A8D8E6", bg = "#4a4a4a", bold = true })
+      --  vim.api.nvim_set_hl(0, "TelescopeMatching", { fg = "#FFB86C" })
+      --  vim.api.nvim_set_hl(0, "TelescopePromptPrefix", { fg = "#56B6C2" })
     end,
   },
 
@@ -219,26 +219,16 @@ return {
     opts = {
       views = {
         cmdline_popup = {
-          position = { row = "50%", col = "50%" },
-          size = { width = "90%", height = "auto" },
+          position = { row = "35%", col = "50%" },
+          size = { width = "40%", height = "auto" },
           lsp_doc_border = true,
-          format = function(item)
-            -- Add 3-space margin between match and virtual text
-            if item.virtual_text then
-              item.virtual_text = "    | " .. item.virtual_text
-            end
-            return item
-          end,
         },
       },
       presets = { command_palette = true, bottom_search = true },
       notify = { enabled = true },
     },
-    config = function()
-      local noice = require "noice"
-      noice.setup()
-
-      -- Dismiss messages keymap
+    config = function(_, opts)
+      require("noice").setup(opts)
       vim.keymap.set("n", "<leader>mm", "<cmd>NoiceDismiss<CR>", { desc = "Dismiss Noice Message" })
     end,
   },

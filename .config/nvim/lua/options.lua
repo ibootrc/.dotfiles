@@ -1,6 +1,7 @@
 -- Leader key
 vim.g.mapleader = " "
 -- General options
+vim.opt.timeoutlen = 200
 vim.opt.relativenumber = true
 vim.opt.number = true
 vim.opt.clipboard:append { "unnamed", "unnamedplus" }

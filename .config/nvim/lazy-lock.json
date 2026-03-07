@@ -1,6 +1,6 @@
 {
   "LuaSnip": { "branch": "master", "commit": "5a1e39223db9a0498024a77b8441169d260c8c25" },
-  "archie.nvim": { "branch": "main", "commit": "d37b2704fddf461ee6e47b27a70385f099a9b146" },
+  "archie.nvim": { "branch": "main", "commit": "30bc763fbbc770ec31be5eb4f9c70ccdf7ffd431" },
   "blink.cmp": { "branch": "main", "commit": "4b18c32adef2898f95cdef6192cbd5796c1a332d" },
   "flash.nvim": { "branch": "main", "commit": "fcea7ff883235d9024dc41e638f164a450c14ca2" },
   "friendly-snippets": { "branch": "main", "commit": "6cd7280adead7f586db6fccbd15d2cac7e2188b9" },
@@ -13,7 +13,7 @@
   "nui.nvim": { "branch": "main", "commit": "de740991c12411b663994b2860f1a4fd0937c130" },
   "nvim-autopairs": { "branch": "master", "commit": "59bce2eef357189c3305e25bc6dd2d138c1683f5" },
   "nvim-colorizer.lua": { "branch": "master", "commit": "a065833f35a3a7cc3ef137ac88b5381da2ba302e" },
-  "nvim-lspconfig": { "branch": "master", "commit": "2b87d107942b9eebef768512f5849330335a9493" },
+  "nvim-lspconfig": { "branch": "master", "commit": "2163c54bb6cfec53e3e555665ada945b8c8331b9" },
   "nvim-notify": { "branch": "master", "commit": "8701bece920b38ea289b457f902e2ad184131a5d" },
   "nvim-treesitter": { "branch": "master", "commit": "42fc28ba918343ebfd5565147a42a26580579482" },
   "nvim-treesitter-textobjects": { "branch": "main", "commit": "0bc4ef0a34d80fd6e67b59bd71fcbb0ef9ef4756" },

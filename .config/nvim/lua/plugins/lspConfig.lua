@@ -14,7 +14,7 @@ return {
         mode = mode or "n"
         vim.keymap.set(mode, keys, func, { buffer = bufnr, desc = "LSP: " .. desc })
       end
-      map("R", vim.lsp.buf.rename, "Rename")
+      map("gr", vim.lsp.buf.rename, "Rename")
       map("gd", vim.lsp.buf.definition, "Goto Definition")
       map("gr", vim.lsp.buf.references, "References")
       -- Document highlight only for small buffers
