@@ -2,7 +2,7 @@ return {
   "neovim/nvim-lspconfig",
   dependencies = {
     "saghen/blink.cmp",
-    { "mason-org/mason.nvim", opts = {} },
+    { "mason-org/mason.nvim", opts = { ui = { border = "rounded" } } },
     { "b0o/schemastore.nvim", lazy = true },
   },
   config = function()

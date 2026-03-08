@@ -1,0 +1,66 @@
+# Source tmux reset configuration
+source-file ~/.config/tmux/tmux.reset.conf
+
+# Set terminal options
+set-option -g default-terminal "screen-256color"
+set-option -g terminal-overrides ",xterm-256color:RGB"
+
+# Basic tmux settings
+set -g prefix C-a                     # Use Ctrl-A as the prefix
+set -g base-index 1                   # Start indexing windows at 1 instead of 0
+set -g detach-on-destroy off          # Don't exit tmux when closing a session
+set -g escape-time 0                  # Zero-out escape time delay
+set -g history-limit 1000000          # Increase history size (default: 2,000)
+set -g renumber-windows on            # Renumber windows when one is closed
+set -g status-position top            # Place status bar at the top
+setw -g mode-keys vi                  # Use vi keybindings in copy mode
+set -g display-time 1000
+set -g set-clipboard on               # Use system clipboard for copy/paste
+set -s copy-command 'xclip -selection clipboard'
+# Mouse settings
+set -g mouse on                       # Allow mouse to select windows and panes
+
+# Set the borders for the inactive and active panes
+set -g pane-border-lines simple
+set -g pane-border-style 'fg=colour255'
+set -g pane-active-border-style 'fg=#1b668f'
+
+# Plugins (using TPM for plugin management)
+set -g @plugin 'tmux-plugins/tpm'
+set -g @plugin 'tmux-plugins/tmux-sensible'
+set -g @plugin 'tmux-plugins/tmux-yank'
+set -g @plugin 'tmux-plugins/tmux-resurrect'
+set -g @plugin 'tmux-plugins/tmux-continuum'
+
+set -g @resurrect-strategy-nvim 'session'
+set -g @continuum-restore 'on'
+set -g @continuum-save-interval '10'
+
+set -gF popup-style "bg=default,fg=#1b668f"
+set -gF popup-border-style "fg=#1b668f"
+set -gF menu-selected-style "bg=#1b668f,fg=#E4F0FB"
+set -g mode-style "bg=#1b668f,bold"
+set -g message-style "bg=#1b668f,fg=#E4F0FB"
+
+# Error Messages (Invalid Commands)
+set -g message-command-style "bg=#D0679D,fg=#FAE4FC"
+
+# Status Bar Background and Foreground Colors
+set -g status-bg '#212124'  
+#set -g status-bg 'black'  
+#set -g status-style "bg=default"
+set -g status-fg '#506477'  
+
+# Inactive Windows Style
+set -g window-status-format "#[fg=white,bg=black] #I:#W "
+
+# Active Window Style
+set -g window-status-current-format "#[fg=#E4F0FB,bg=#1b668f,bold] #I:#W "
+
+# Status bar left section: session name and window index
+set -g status-left '#[fg=#E4F0FB,bg=#D0679D,bold] [#S] '
+
+set -g status-right ''
+
+# TPM (Tmux Plugin Manager) initialization
+run '~/.tmux/plugins/tpm/tpm'
