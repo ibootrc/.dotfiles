@@ -17,7 +17,8 @@ bindsym $mod+q kill
 bindsym $mod+space exec --no-startup-id rofi -show drun -show-icons
 
 # Start Applications
-bindsym F3 exec firefox  
+bindsym F3 exec firefox
+bindsym F7 exec obsidian --disable-gpu --disable-software-rasterizer
 bindsym Shift+F3 exec firefox --private-window
 bindsym F4 exec dolphin
 bindsym $mod+x --release exec --no-startup-id xkill
