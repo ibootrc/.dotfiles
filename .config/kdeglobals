@@ -1,15 +1,16 @@
-[Colors:View]
-BackgroundNormal=#00000000
+[Appearance]
+ColorScheme=WhiteSurDark
 
 [General]
-TerminalApplication=kitty
+Name=WhiteSurDark
+widgetStyle=kvantum
+
+[Icons]
+Theme=WhiteSur
 
 [KDE]
-ShowDeleteCommand=false
+widgetStyle=qt6ct-style
 
 [PreviewSettings]
 EnableRemoteFolderThumbnail=false
 MaximumRemoteSize=0
-
-[UiSettings]
-ColorScheme=*

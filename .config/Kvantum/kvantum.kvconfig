@@ -1,5 +1,6 @@
 [General]
-theme=WhiteSurDark
+theme=MacSequoiaDark
 
 [Applications]
 KvMojave%23=dolphin
+WhiteSurDark=dolphin
