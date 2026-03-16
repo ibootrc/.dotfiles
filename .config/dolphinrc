@@ -1,0 +1,16 @@
+[General]
+Version=202
+ViewPropsTimestamp=2026,3,10,19,39,42.126
+
+[KFileDialog Settings]
+Places Icons Auto-resize=false
+Places Icons Static Size=22
+
+[MainWindow]
+MenuBar=Disabled
+
+[PreviewSettings]
+Plugins=directorythumbnail,imagethumbnail,jpegthumbnail,ffmpegthumbs
+
+[UiSettings]
+ColorScheme=WhiteSurDark

@@ -1,7 +1,5 @@
-[Appearance]
-ColorScheme=WhiteSurDark
-
 [General]
+ColorScheme=WhiteSurDark
 Name=WhiteSurDark
 widgetStyle=kvantum
 
@@ -9,8 +7,28 @@ widgetStyle=kvantum
 Theme=WhiteSur
 
 [KDE]
-widgetStyle=qt6ct-style
+# Changed to 'kvantum' to ensure Dolphin uses the engine directly
+widgetStyle=kvantum
 
-[PreviewSettings]
-EnableRemoteFolderThumbnail=false
-MaximumRemoteSize=0
+[Colors:Button]
+BackgroundNormal=101,101,101
+ForegroundNormal=252,252,252
+# Fixes sidebar item hover/focus
+DecorationFocus=49,91,239
+DecorationHover=49,91,239
+
+[Colors:Selection]
+# This is your main blue highlight
+BackgroundNormal=49,91,239
+ForegroundNormal=255,255,255
+
+[Colors:View]
+BackgroundNormal=36,36,36
+ForegroundNormal=252,252,252
+
+[Colors:Window]
+BackgroundNormal=54,54,54
+ForegroundNormal=252,252,252
+# Fixes sidebar background focus highlights
+DecorationFocus=49,91,239
+DecorationHover=49,91,239
