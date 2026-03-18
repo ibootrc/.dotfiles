@@ -142,6 +142,8 @@ bindsym Ctrl+Print exec --no-startup-id maim --window $(xdotool getactivewindow)
 
 bindsym Shift+Print exec --no-startup-id maim --select "/home/$USER/Pictures/ScreenShot/$(date).png" && notify-send "Screenshot has been taken"
 
+bindsym $mod+Print exec --no-startup-id maim --select "/home/echo/Documents/Personal/2Cere/Settings/Assets/INSTA_$(date).png" && notify-send "INSTA Screenshot has been taken"
+
 # switch to workspace with urgent window automatically
 #for_window [urgent=latest] focus
 for_window [urgent="latest" class="firefox" workspace=$ws1] focus ; workspace number $ws1
