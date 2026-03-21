@@ -1,0 +1,74 @@
+
+# --- General Settings & UI Removal ---
+set selection-clipboard clipboard
+set guioptions          ""           # Minimalist: no scrollbars/labels
+set statusbar-basename  true         # Clean status bar (filename only)
+set window-title-basename true
+set scroll-step         60           # Smoother ebook-like scrolling
+set adjust-open         "width"      # Fit to width by default
+set render-loading      "false"      # Avoid white flash when loading pages
+set adjust-open "width"
+
+# Set the starting directory for the :open command
+set datadir "/home/echo/Documents/Ebooks"
+# --- Archie.nvim Palette Mapping ---
+# BG: #1c1c1c (Sumie) | FG: #f2f2f2 (Cloud) | Accent: #0087d7 (Arch Blue)
+
+# Default UI Colors
+set default-bg                  "#1c1c1c"
+set default-fg                  "#f2f2f2"
+
+# Statusbar (Using Archie "Status" colors)
+set statusbar-bg                "#262626"
+set statusbar-fg                "#f2f2f2"
+
+# Inputbar (Command mode)
+set inputbar-bg                 "#1c1c1c"
+set inputbar-fg                 "#5fafff" # Sky Blue accent
+
+# Highlighting (Search & Selections)
+set highlight-color             "#005f87" # Deep Arch Blue
+set highlight-active-color      "#0087d7" # Bright Arch Blue
+
+# Notifications (Archie Diagnostics)
+set notification-error-bg       "#af5f5f" # Red
+set notification-error-fg       "#1c1c1c"
+set notification-warning-bg     "#dfaf5f" # Yellow/Gold
+set notification-warning-fg     "#1c1c1c"
+
+# --- Real Night Mode (Recolor) ---
+set recolor                     "true"
+set recolor-keephue             "true"    # Keeps images from looking inverted
+set recolor-lightcolor          "#1c1c1c" # Page Background
+set recolor-darkcolor           "#f2f2f2" # Page Text
+# Completion colors (The 'o' menu)
+set completion-bg               "#262626" # Slightly lighter than main bg
+set completion-fg               "#f2f2f2" # Cloud White text
+set completion-highlight-bg     "#0087d7" # Arch Blue selection
+set completion-highlight-fg     "#f2f2f2" # White text on blue highlight
+
+# Input bar (Where you type the filename)
+set inputbar-bg                 "#1c1c1c" # Sumie Black
+set inputbar-fg                 "#f2f2f2" # Cloud White
+
+# Ensure the status bar is visible
+set guioptions "s"           # 's' stands for statusbar; removing 's' hides it
+
+# Professional Status Bar Look (Archie Colors)
+set statusbar-bg "#262626"   # Slightly lighter grey (Archie Status)
+set statusbar-fg "#f2f2f2"   # Cloud White text
+
+
+# --- Essential Ebook Keybindings ---
+map [normal] i                  recolor           # Toggle Night Mode
+map [normal] <Space>            scroll down       # One-handed reading
+map [normal] <S-Space>          scroll up
+map [normal] f                  follow            # Jump to links/footnotes
+map [normal] Tab                index             # Table of Contents
+map [normal] r                  rotate rotate-cw  # Rotate for horizontal PDFs
+map [normal] J           scroll full-down
+map [normal] K           scroll full-up
+
+# Syncing with Neovim feel
+map [normal] d                  scroll half-down
+map [normal] u                  scroll half-up
