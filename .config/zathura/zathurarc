@@ -1,74 +1,84 @@
+# --- 1. General Settings & UI ---
+set selection-clipboard      clipboard
+set guioptions               "s"           # Statusbar only, no scrollbars
+set statusbar-basename       true          # Clean status bar (filename only)
+set window-title-basename    true
+set scroll-step              60           
+set adjust-open              "width"      
+set render-loading           "false"      
+set font                     "monospace 10"
 
-# --- General Settings & UI Removal ---
-set selection-clipboard clipboard
-set guioptions          ""           # Minimalist: no scrollbars/labels
-set statusbar-basename  true         # Clean status bar (filename only)
-set window-title-basename true
-set scroll-step         60           # Smoother ebook-like scrolling
-set adjust-open         "width"      # Fit to width by default
-set render-loading      "false"      # Avoid white flash when loading pages
-set adjust-open "width"
+# --- 2. Directory & Data ---
+set datadir                  "/home/echo/Documents/Ebooks"
 
-# Set the starting directory for the :open command
-set datadir "/home/echo/Documents/Ebooks"
-# --- Archie.nvim Palette Mapping ---
-# BG: #1c1c1c (Sumie) | FG: #f2f2f2 (Cloud) | Accent: #0087d7 (Arch Blue)
+# --- 3. Archie.nvim Palette Mapping ---
+# BG: #1c1c1c (Sumie) | FG: #BEB199 (Cloud) | Accent: #01D8DD (Cyan/Blue)
+set default-bg               "#1c1c1c"
+set default-fg               "#BEB199"
 
-# Default UI Colors
-set default-bg                  "#1c1c1c"
-set default-fg                  "#f2f2f2"
+# Statusbar (Bottom bar)
+set statusbar-bg             "#262626"
+set statusbar-fg             "#01D8DD"
 
-# Statusbar (Using Archie "Status" colors)
-set statusbar-bg                "#262626"
-set statusbar-fg                "#f2f2f2"
+# Inputbar (Command line)
+set inputbar-bg              "#1c1c1c"
+set inputbar-fg              "#01D8DD"
 
-# Inputbar (Command mode)
-set inputbar-bg                 "#1c1c1c"
-set inputbar-fg                 "#5fafff" # Sky Blue accent
+# Completion colors (The 'o' menu list)
+set completion-bg            "#262626"
+set completion-fg            "#BEB199"
+set completion-highlight-bg  "#0087d7" 
+set completion-highlight-fg  "#1c1c1c" 
 
-# Highlighting (Search & Selections)
-set highlight-color             "#005f87" # Deep Arch Blue
-set highlight-active-color      "#0087d7" # Bright Arch Blue
+# Index / Table of Contents (The 'Tab' menu)
+set index-bg                 "#1c1c1c"
+set index-fg                 "#01D8DD"
+set index-active-bg          "#0087d7"
+set index-active-fg          "#af5f5f"
 
-# Notifications (Archie Diagnostics)
-set notification-error-bg       "#af5f5f" # Red
-set notification-error-fg       "#1c1c1c"
-set notification-warning-bg     "#dfaf5f" # Yellow/Gold
-set notification-warning-fg     "#1c1c1c"
+# --- 4. Highlighting & Notifications ---
+# Transparent highlights (RGBA) so text stays visible while selecting
+set highlight-color          "rgba(0, 95, 135, 0.5)"  # Deep Arch Blue
+set highlight-active-color   "rgba(0, 135, 215, 0.5)" # Bright Arch Blue
+set highlight-fg             "#01D8DD"                # Link hint color
 
-# --- Real Night Mode (Recolor) ---
-set recolor                     "true"
-set recolor-keephue             "true"    # Keeps images from looking inverted
-set recolor-lightcolor          "#1c1c1c" # Page Background
-set recolor-darkcolor           "#f2f2f2" # Page Text
-# Completion colors (The 'o' menu)
-set completion-bg               "#262626" # Slightly lighter than main bg
-set completion-fg               "#f2f2f2" # Cloud White text
-set completion-highlight-bg     "#0087d7" # Arch Blue selection
-set completion-highlight-fg     "#f2f2f2" # White text on blue highlight
+set notification-error-bg    "#af5f5f"
+set notification-error-fg    "#1c1c1c"
+set notification-warning-bg  "#dfaf5f"
+set notification-warning-fg  "#1c1c1c"
+set selection-notification   false         # Silent copying (no popup)
 
-# Input bar (Where you type the filename)
-set inputbar-bg                 "#1c1c1c" # Sumie Black
-set inputbar-fg                 "#f2f2f2" # Cloud White
+# --- 5. Real Night Mode (Recolor) ---
+set recolor                  "true"
+set recolor-keephue          "true"    # Preserves image colors
+set recolor-lightcolor       "#1c1c1c" # Paper color
+set recolor-darkcolor        "#BEB199" # Text color
 
-# Ensure the status bar is visible
-set guioptions "s"           # 's' stands for statusbar; removing 's' hides it
+# --- 6. Essential Keybindings (Normal Mode) ---
+map [normal] i               recolor           # Toggle Night Mode
+map [normal] f               follow            # Jump to links/footnotes
+map [normal] Tab             index             # Toggle Table of Contents
+map [normal] r               rotate rotate-cw  
+map [normal] =               zoom in
+map [normal] -               zoom out
 
-# Professional Status Bar Look (Archie Colors)
-set statusbar-bg "#262626"   # Slightly lighter grey (Archie Status)
-set statusbar-fg "#f2f2f2"   # Cloud White text
+# Page Flipping (Ebook Style)
+map [normal] J               scroll full-down
+map [normal] K               scroll full-up
+map [normal] <Space>         scroll full-down
+map [normal] <S-Space>       scroll full-up
 
+# Half Page (Vim Style)
+map [normal] d               scroll half-down
+map [normal] u               scroll half-up
 
-# --- Essential Ebook Keybindings ---
-map [normal] i                  recolor           # Toggle Night Mode
-map [normal] <Space>            scroll down       # One-handed reading
-map [normal] <S-Space>          scroll up
-map [normal] f                  follow            # Jump to links/footnotes
-map [normal] Tab                index             # Table of Contents
-map [normal] r                  rotate rotate-cw  # Rotate for horizontal PDFs
-map [normal] J           scroll full-down
-map [normal] K           scroll full-up
+# Quick-Open Ebooks Folder
+map [normal] o               feedkeys ":open /home/echo/Documents/Ebooks/"
 
-# Syncing with Neovim feel
-map [normal] d                  scroll half-down
-map [normal] u                  scroll half-up
+# --- 7. Index Navigation (Vim Tree Style) ---
+# These work only when the Table of Contents is open
+map [index] k                navigate_index up
+map [index] j                navigate_index down
+map [index] h                navigate_index collapse
+map [index] l                navigate_index expand
+map [index] <Return>         navigate_index select
