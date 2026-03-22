@@ -84,7 +84,7 @@ return {
         desc = "File Browser",
       },
       {
-        ";u",
+        ";w",
         function()
           require("telescope").extensions.undo.undo()
         end,

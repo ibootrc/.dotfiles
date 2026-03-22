@@ -71,7 +71,7 @@ return {
 
       -- 3. REPEATABLE MOVEMENTS
       -- After one jump, spam ; or , to keep moving
-      vim.keymap.set({ "n", "x", "o" }, ";", ts_repeat.repeat_last_move_next)
+      vim.keymap.set({ "n", "x", "o" }, ".", ts_repeat.repeat_last_move_next)
       vim.keymap.set({ "n", "x", "o" }, ",", ts_repeat.repeat_last_move_previous)
 
       -- Sync standard f/t movements with the same ;/, repeat logic
