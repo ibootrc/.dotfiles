@@ -16,6 +16,10 @@ require "options"
 
 -- 2. Setup Lazy with Premium UI & Performance optimizations
 require("lazy").setup("plugins", {
+  install = {
+    -- This forces Lazy to attempt to load Archie specifically for the UI
+    colorscheme = { "archie", "habamax" },
+  },
   ui = {
     -- Glass Look: No background dimming
     backdrop = 100,
