@@ -41,15 +41,13 @@ return {
       sources = {
         default = { "lsp", "path", "snippets" },
       },
-
       snippets = { preset = "luasnip" },
-
       fuzzy = { implementation = "lua" }, -- fast Lua fuzzy matcher
-
       signature = { enabled = false }, -- optional: enable manually if needed
     },
   },
   --- supermaven config
+
   {
     "supermaven-inc/supermaven-nvim",
     config = function()

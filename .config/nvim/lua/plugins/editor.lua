@@ -226,11 +226,9 @@ return {
       },
       presets = { command_palette = true, bottom_search = true },
       notify = { enabled = true },
+      -- ADD THIS LINE TO FIX THE FZF ERROR:
+      --commands = { history = { view = "split" } },
     },
-    config = function(_, opts)
-      require("noice").setup(opts)
-      vim.keymap.set("n", "<leader>mm", "<cmd>NoiceDismiss<CR>", { desc = "Dismiss Noice Message" })
-    end,
   },
 
   -- null-ls config
