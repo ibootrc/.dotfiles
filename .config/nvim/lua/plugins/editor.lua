@@ -78,7 +78,9 @@ return {
             grouped = true,
             previewer = false,
             initial_mode = "normal",
-            layout_config = { height = 30 },
+            layout_config = {
+              height = 30,
+            },
           }
         end,
         desc = "File Browser",
@@ -100,12 +102,19 @@ return {
       opts.defaults = vim.tbl_deep_extend("force", opts.defaults or {}, {
         wrap_results = true,
         layout_strategy = "horizontal",
-        layout_config = { prompt_position = "top" },
+        layout_config = {
+          horizontal = {
+            prompt_position = "top",
+            width = 0.90, -- High-performance HUD width
+            preview_width = 0.50, -- Big preview for code
+          },
+          -- This keeps your other themes (ivy/dropdown) from crashing
+          height = 0.60,
+        },
         sorting_strategy = "ascending",
         winblend = 0,
         mappings = { n = {} },
       })
-
       -- Pickers
       opts.pickers = {
         diagnostics = {
