@@ -182,8 +182,39 @@ return {
   },
 
   -- Autopairs config
-  { "windwp/nvim-autopairs", event = "InsertEnter", config = true },
+  {
+    "windwp/nvim-autopairs",
+    event = "InsertEnter",
+    config = function()
+      local npairs = require "nvim-autopairs"
 
+      npairs.setup {
+        check_ts = true, -- use treesitter to check for pairs
+        ts_config = {
+          lua = { "string" }, -- don't add pairs in lua string treesitter nodes
+          javascript = { "template_string" },
+        },
+        enable_moveright = false,
+        -- don't add pairs if it's already close
+        enable_check_bracket_line = true,
+        -- check treesitter for the cursor position
+        map_cr = true,
+      }
+
+      -- Add a specific rule to ensure typing '[' always results in '[|]'
+      local Rule = require "nvim-autopairs.rule"
+      npairs.add_rules {
+        Rule("[ ", " ]")
+          :with_pair(function()
+            return false
+          end)
+          :with_move(function(opts)
+            return opts.prev_char:match ".%]" ~= nil
+          end)
+          :use_key "]",
+      }
+    end,
+  },
   -- Colorizer
   {
     "norcalli/nvim-colorizer.lua",

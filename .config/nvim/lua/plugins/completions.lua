@@ -31,10 +31,25 @@ return {
     opts = {
       keymap = {
         preset = "default",
-        ["<CR>"] = { "select_and_accept", "fallback" }, -- optimized Enter
+        -- Modified Enter to ensure nvim-autopairs handles the bracket placement
+        ["<CR>"] = {
+          function(cmp)
+            return cmp.accept {
+              callback = function()
+                require("nvim-autopairs.completion.cmp").on_confirm_done()
+              end,
+            }
+          end,
+          "fallback",
+        },
       },
 
       completion = {
+        accept = {
+          -- We disable this so blink doesn't force the cursor outside
+          -- It lets your editor.lua autopairs config do the work
+          auto_brackets = { enabled = false },
+        },
         documentation = { auto_show = false, auto_show_delay_ms = 500 }, -- less overhead
       },
 
@@ -46,8 +61,8 @@ return {
       signature = { enabled = false }, -- optional: enable manually if needed
     },
   },
-  --- supermaven config
 
+  --- supermaven config
   {
     "supermaven-inc/supermaven-nvim",
     config = function()
