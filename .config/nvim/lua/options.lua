@@ -70,6 +70,9 @@ vim.keymap.set("n", "<leader><leader>", function()
   print "Config Reloaded!"
 end)
 
+-- NoiceDismiss
+vim.keymap.set("n", "<esc>", "<cmd>NoiceDismiss<CR>", { nowait = true })
+
 -- Window Navigation
 vim.keymap.set("n", "<C-h>", "<C-w>h", { desc = "Focus left" })
 vim.keymap.set("n", "<C-l>", "<C-w>l", { desc = "Focus right" })

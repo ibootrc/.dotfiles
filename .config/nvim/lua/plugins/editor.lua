@@ -266,8 +266,6 @@ return {
       },
       presets = { command_palette = true, bottom_search = true },
       notify = { enabled = true },
-      -- ADD THIS LINE TO FIX THE FZF ERROR:
-      --commands = { history = { view = "split" } },
     },
   },
 
