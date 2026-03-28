@@ -256,6 +256,7 @@ return {
     "folke/noice.nvim",
     event = "VeryLazy",
     dependencies = { "MunifTanjim/nui.nvim", "rcarriga/nvim-notify", "saghen/blink.cmp" },
+
     opts = {
       views = {
         cmdline_popup = {
