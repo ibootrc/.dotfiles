@@ -132,8 +132,11 @@ for_window [window_role="pop-up"] floating enable, move position center
 for_window [window_role="Msgcompose"] floating enable resize set 922 547
 for_window [window_type="dialog"] floating enable resize set 700 540, move position center
 for_window [instance="Places"] floating enable resize set 886 636, move position 70 94
-
 for_window [class="^obsidian$"] border none
+
+
+# Combined fix: One bind, multiple window criteria
+bindsym Escape [class="(?i)firefox" instance="(?i)places|toolkit"] kill, [title="(?i)library|downloads"] kill
 
 ## Screenshots
 bindsym Print exec --no-startup-id maim "/home/$USER/Pictures/ScreenShot/$(date).png" && notify-send "Screenshot has been taken"

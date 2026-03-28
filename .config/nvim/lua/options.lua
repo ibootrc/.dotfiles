@@ -39,8 +39,8 @@ vim.opt.fillchars = {
 }
 
 -- THE "NO-HEADACHE" SNAP-TO-TOP MAPPINGS
-
 -- 1. Visual Mode (Selection starts, snaps start of block to top)
+
 local v_objects = { "i{", "i[", "i(" }
 for _, obj in ipairs(v_objects) do
   vim.keymap.set("v", obj, obj .. "oztvo", { noremap = true, silent = true })

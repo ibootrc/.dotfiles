@@ -55,7 +55,7 @@ return {
           icons_enabled = true,
           theme = my_archie_theme,
           component_separators = "",
-          section_separators = "", -- Removed separators for a seamless "Bar" look
+          section_separators = "",
           globalstatus = true,
         },
       }
