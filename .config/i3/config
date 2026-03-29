@@ -14,7 +14,8 @@ bindsym $mod+Return exec kitty
 bindsym $mod+q kill
 
 # start program launcher
-bindsym $mod+space exec --no-startup-id rofi -show drun -show-icons
+bindsym $mod+space exec --no-startup-id rofi -show drun -matching fuzzy -sorting-method fzf -show-icons
+
 
 # Start Applications
 bindsym F3 exec firefox
