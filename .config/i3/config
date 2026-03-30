@@ -26,7 +26,7 @@ bindsym $mod+x --release exec --no-startup-id xkill
 bindsym $mod+u exec xbacklight -inc 15
 bindsym $mod+d exec xbacklight -dec 15
 # Reboot & shutdown
-bindsym Ctrl+Shift+s exec shutdown -now 
+bindsym Ctrl+Shift+s exec shutdown -now
 
 # focus_follows_mouse no
 # alternatively, you can use the cursor keys:
@@ -89,7 +89,7 @@ bindsym $mod+Ctrl+Right workspace next
 bindsym $mod+Ctrl+Left workspace prev
 
 # redShift
-bindsym $mod+ctrl+r exec redshift -P -O 5000
+bindsym $mod+ctrl+r exec redshift -P -O 6000
 # Workspace names
 set $ws1 I
 set $ws2 II
@@ -137,9 +137,8 @@ for_window [class="^obsidian$"] border none
 for_window [class="pavucontrol"] floating enable resize set 640 440, move position center
 
 
-# keybinds for killing firefox sub-windows
-bindsym grave [class="(?i)firefox" instance="(?i)places|toolkit"] kill, [title="(?i)library|downloads"] kill
-
+# Using 'focus' prevents the kill command from hitting the main window if no panel is found
+bindsym --whole-window button2 [class="(?i)firefox" instance="(?i)places|toolkit"] focus; kill; [title="(?i)library|downloads"] focus; kill
 
 ## Screenshots
 bindsym Print exec --no-startup-id maim "/home/$USER/Pictures/ScreenShot/$(date).png" && notify-send "Screenshot has been taken"
@@ -246,7 +245,7 @@ bindsym $mod+m bar mode toggle
 
 # Set inner/outer gaps
 gaps inner 3
-gaps outer 3  
+gaps outer 3
 
 # Additionally, you can issue commands with the following syntax. This is useful to bind keys to changing the gap size.
 # gaps inner|outer current|all set|plus|minus <px>
