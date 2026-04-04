@@ -221,7 +221,7 @@ return {
 
       code = {
         enabled = true,
-        render_modes = false,
+        render_modes = true,
         sign = true,
         conceal_delimiters = true,
         language = true,
@@ -229,7 +229,6 @@ return {
         language_icon = true,
         language_name = true,
         width = "full",
-        border = "hide",
         highlight = "RenderMarkdownCode",
         highlight_inline = "RenderMarkdownCodeInline",
         style = "full",

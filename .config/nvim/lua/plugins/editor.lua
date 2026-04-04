@@ -225,6 +225,9 @@ return {
         html = { mode = "foreground" },
         javascript = { mode = "foreground" },
       }
+      vim.keymap.set("n", ";b", "<cmd>ColorizerToggle<CR>", {
+        desc = "Toggle Colorizer",
+      })
     end,
   },
 
