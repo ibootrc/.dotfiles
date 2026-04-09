@@ -54,8 +54,8 @@ export PATH=$PATH:/usr/local/go/bin
 # -----------------------------
 # AUTOSUGGESTIONS KEYBIND
 # -----------------------------
-bindkey -r '^j'
-bindkey '^j' autosuggest-accept
+bindkey -r '^;'
+bindkey '^;' autosuggest-accept
 
 # -----------------------------
 # XDG RUNTIME DIR
@@ -78,21 +78,41 @@ autoload -Uz add-zsh-hook
 load_fzf() {
   unset -f load_fzf
 
+  # core UI options
   export FZF_DEFAULT_OPTS="--style minimal --height 40% --layout=reverse --border"
 
   if command -v fzf >/dev/null 2>&1; then
-    source <(fzf --zsh)
+    # load fzf shell integration
+    # NOTE: strip default keybindings to avoid Alt / Ctrl+Alt conflicts
+    source <(fzf --zsh | sed '/bindkey/d')
   fi
+	
+  # custom keybindings (safe, no terminal conflicts)
+  # standard fzf flows (keep muscle memory)
+	
+  bindkey '^T' fzf-file-widget        # Ctrl+T → file picker
+  bindkey '^R' fzf-history-widget     # Ctrl+R → history search
+
+  # optional Alt bindings (non-conflicting replacements)
+  bindkey '^[p' fzf-file-widget       # Alt+P → file picker
+  bindkey '^[o' fzf-cd-widget         # Alt+O → cd into directory
 }
 
+# trigger lazy load before first prompt
 add-zsh-hook precmd load_fzf
+
+# ------------------------------------------------------------------
+# default search scope (fd)
+# ------------------------------------------------------------------
+
 export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow \
   --exclude .git \
-	--exclude node_modules \
-	--exclude dist \
-	--exclude .cache \'
-export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+  --exclude node_modules \
+  --exclude dist \
+  --exclude .cache \'
 
+# reuse for Ctrl+T
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 # NVM
 nvm() {
   unset -f nvm
