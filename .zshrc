@@ -54,8 +54,8 @@ export PATH=$PATH:/usr/local/go/bin
 # -----------------------------
 # AUTOSUGGESTIONS KEYBIND
 # -----------------------------
-bindkey -r '^;'
-bindkey '^;' autosuggest-accept
+bindkey -r '^\'
+bindkey '^\' autosuggest-accept
 
 # -----------------------------
 # XDG RUNTIME DIR
