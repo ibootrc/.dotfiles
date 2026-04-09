@@ -19,7 +19,7 @@ bindsym $mod+space exec --no-startup-id rofi -show drun -matching fuzzy -sorting
 
 # Start Applications
 bindsym F3 exec firefox
-bindsym F9 exec obsidian --disable-gpu --disable-software-rasterizer
+bindsym F9 exec obsidian --disable-gpu --disable-software-rasterizer --disable-gpu-sandbox --ozone-platform=x11
 bindsym Shift+F3 exec firefox --private-window
 bindsym F4 exec dolphin
 bindsym $mod+x --release exec --no-startup-id xkill
@@ -85,11 +85,9 @@ bindsym $mod+Shift+minus move scratchpad
 bindsym $mod+minus scratchpad show
 
 #navigate workspaces next / previous
-bindsym $mod+Ctrl+Right workspace next
-bindsym $mod+Ctrl+Left workspace prev
+bindsym Ctrl+j workspace next
+bindsym Ctrl+k workspace prev
 
-# redShift
-bindsym $mod+ctrl+r exec redshift -P -O 6000
 # Workspace names
 set $ws1 I
 set $ws2 II
@@ -104,14 +102,6 @@ bindsym $mod+2 workspace $ws2
 bindsym $mod+3 workspace $ws3
 bindsym $mod+4 workspace $ws4
 bindsym $mod+5 workspace $ws5
-
-
-# Move focused container to workspace
-#bindsym $mod+Ctrl+1 move container to workspace $ws1
-#bindsym $mod+Ctrl+2 move container to workspace $ws2
-#bindsym $mod+Ctrl+3 move container to workspace $ws3
-#bindsym $mod+Ctrl+3 move container to workspace $ws4
-#bindsym $mod+Ctrl+5 move container to workspace $ws5
 
 # Move to workspace with focused container
 bindsym Ctrl+1 move container to workspace $ws1; workspace $ws1
@@ -157,7 +147,7 @@ for_window [urgent="latest" class="firefox" workspace=$ws1] focus ; workspace nu
 bindsym $mod+Shift+c reload
 
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
-bindsym $mod+Shift+r restart
+bindsym Shift+r restart
 
 # exit i3 (logs you out of your X session)
 bindsym $mod+Escape exec i3-msg exit
@@ -187,52 +177,55 @@ mode "resize" {
 }
 
 # Lock screen
-bindsym $mod+Shift+l exec --no-startup-id betterlockscreen -l blur 100 
+bindsym Shift+l exec --no-startup-id betterlockscreen -l blur 100 
+
 
 
 # Autostart applications
 exec --no-startup-id nitrogen --restore
-exec --no-startup-id picom -b 
-exec --no-startup-id nm-applet
+exec --no-startup-id picom -b
+exec --no-startup-id pasystray
+exec_always --no-startup-id bash -c "sleep 2; nm-applet"
 exec --no-startup-id xclip
 exec --no-startup-id udiskie -ans
 exec_always --no-startup-id autotiling
-exec --no-startup-id "setxkbmap -model pc104 -layout us,ara -option grp:alt_shift_toggle -option ctrl:nocaps"
+exec --no-startup-id "setxkbmap -model pc104 -layout us,ara -option grp:alt_shift_toggle"
 exec --no-startup-id XDG_MENU_PREFIX=arch- kbuildsycoca6
 exec --no-startup-id libinput-gestures-setup start
 exec --no-startup-id xrandr --output DP1 --mode 1024x768
-exec --no-startup-id "nvidia-settings -l"
 exec --no-startup-id dunst
 exec --no-startup-id kanata -c ~/.config/kanata/config.kbd
-exec --no-startup-id pasystray  
 exec redshift -P -O 5000
 
 
-
+#client.focused #01D8DD #01D8DD #FFFFFF #01D8DD #01D8DD
 
 bar {
-	i3bar_command i3bar 
-		status_command i3blocks -c /home/echo/.config/i3/i3blocks.conf
-		position bottom
+    status_command i3blocks -c ~/.config/i3/i3blocks.conf
+    position bottom
+    font xft:URWGothic-Book 11
+    strip_workspace_numbers yes
 
-		bindsym button4 nop
-		bindsym button5 nop
-		font xft:URWGothic-Book 11
-		strip_workspace_numbers yes
+    tray_output primary
 
-		colors {
-			background #25282A
-				statusline #F9FAF9
-				separator  #0071E3
+    colors {
+        # Transparent dark background (alpha = CC ≈ 80%)
+        background #25282ACC
+        statusline #F9FAF9
+        separator  #0071E3
 
-#                           border  backgr. text
-				focused_workspace  #222222 #005577 #FFFFFF
-				active_workspace   #222222 #005577 #FFFFFF
-				inactive_workspace #333333 #222222 #888888
-				binding_mode       #16a085 #F8485E #FFFFFF
-				urgent_workspace   #16a085 #F8485E #FFFFFF
-		}
+        # Workspaces (kept solid)
+        focused_workspace  #222222 #005577 #FFFFFF
+        active_workspace   #222222 #005577 #FFFFFF
+        inactive_workspace #333333 #222222 #888888
+        binding_mode       #16a085 #F8485E #FFFFFF
+        urgent_workspace   #16a085 #F8485E #FFFFFF
+    }
 }
+
+# Disable scroll workspace switching (outside bar block)
+bindsym button4 nop
+bindsym button5 nop
 
 # hide/unhide i3status bar
 bindsym $mod+m bar mode toggle

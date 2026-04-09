@@ -1,0 +1,8 @@
+bind i mode ignore
+bind --mode=ignore <Esc> mode normal
+
+set findmode tridactyl
+bind / fillcmdline find
+bind n findnext
+bind N findprev
+bind <BS> clearsearchhighlight

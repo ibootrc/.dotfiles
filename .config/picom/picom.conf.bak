@@ -1,24 +1,27 @@
-#;; ---------------------------------
+# ---------------------------------
 #           Animations
 # ---------------------------------
 
-transition-length = 400
-transition-pow-x = 0.7
-transition-pow-y = 0.7
-transition-pow-w = 0.7
-transition-pow-h = 0.7
+transition-length = 300
+transition-pow-x = 0.2
+transition-pow-y = 0.2
+transition-pow-w = 0.2
+transition-pow-h = 0.2
 size-transition = true
 
 # Open windows
-animation-for-open-window = "zoom"       # Similar to the 'Scale' effect
-animation-for-unmap-window = "zoom"     # Zooming out feels more premium than squeeze
-animation-for-transient-window = "zoom"  # Popups appearing from center feels m
+animation-for-open-window = "zoom"
+# Minimize or close windows
+animation-for-unmap-window = "squeeze"
+# Popup windows
+animation-for-transient-window = "slide-up"  # Available options: slide-up, slide-down, slide-left, slide-right, squeeze, squeeze-bottom, zoom
 
 # Animation for windows during tag change
-animation-for-prev-tag = "slide-right"
+animation-for-prev-tag = "minimize"
 enable-fading-prev-tag = true
-animation-for-next-tag = "slide-left"
+animation-for-next-tag = "slide-in-center"
 enable-fading-next-tag = true
+
 # ---------------------------------
 #           Corners
 # ---------------------------------
@@ -65,7 +68,7 @@ fade-exclude = [
 #           Transparency
 # ---------------------------------
 
-inactive-opacity = 0.95
+inactive-opacity = 0.9
 active-opacity = 1.0
 inactive-opacity-override = false
 
