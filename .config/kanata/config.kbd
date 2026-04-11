@@ -1,20 +1,24 @@
 ;; defsrc is still necessary
 (defcfg
  process-unmapped-keys yes
- )
+)
 
 (defsrc
  caps
- )
+ ralt
+)
+
 (defvar
  tap-time 150
  hold-time 200
- )
+)
 
-	(defalias
-	 escctrl (tap-hold $tap-time $hold-time esc lctl)
-	)
+(defalias
+ escctrl (tap-hold $tap-time $hold-time esc lctl)
+ altgrmeta rmet
+)
 
-	(deflayer base
-	 @escctrl
-	)
+(deflayer base
+ @escctrl
+ @altgrmeta
+)
