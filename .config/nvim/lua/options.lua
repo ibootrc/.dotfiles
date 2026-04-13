@@ -27,6 +27,12 @@ vim.opt.backup = false
 vim.opt.undodir = os.getenv "HOME" .. "/.vim/undodir"
 vim.opt.undofile = true
 
+-- keep cursor line at top while moving
+vim.keymap.set("n", "j", "jzt", { noremap = true, silent = true })
+vim.keymap.set("n", "k", "kzt", { noremap = true, silent = true })
+vim.keymap.set("n", "}", "}zt", { noremap = true, silent = true })
+vim.keymap.set("n", "{", "{zt", { noremap = true, silent = true })
+
 -- UI and Visual Customizations (Untouched as requested)
 vim.opt.foldcolumn = "0"
 vim.cmd [[highlight FoldColumn guibg=bbg]]
