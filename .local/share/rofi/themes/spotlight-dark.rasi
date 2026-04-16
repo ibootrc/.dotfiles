@@ -24,11 +24,12 @@
 }
 
 window {
-    background-color:   @bg0;
-
-    location:       center;
-    width:          640;
-    border-radius:  8;
+	 background-color: @bg0;
+		location:       center;
+		width:          640;
+		border-radius:  8;
+		//border: 1px;
+		//border-color: #1b668f;
 }
 
 inputbar {

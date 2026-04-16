@@ -50,6 +50,6 @@ return {
   },
   config = function(_, opts)
     require("flash").setup(opts)
-    vim.api.nvim_set_hl(0, "FlashLabel", { fg = "#E6E6E6", bold = true })
+    vim.api.nvim_set_hl(0, "FlashLabel", { fg = "#EBCB8B", bold = true })
   end,
 }
