@@ -176,7 +176,7 @@ mode "resize" {
 }
 
 # Lock screen
-bindsym Shift+l exec --no-startup-id betterlockscreen -l blur 100 
+bindsym Ctrl+Shift+l exec --no-startup-id betterlockscreen -l blur 100 
 
 
 
