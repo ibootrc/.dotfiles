@@ -57,13 +57,6 @@ return {
         desc = "Treesitter symbols",
       },
       {
-        ";c",
-        function()
-          require("telescope.builtin").current_buffer_fuzzy_find()
-        end,
-        desc = "Current buffer search",
-      },
-      {
         ";a",
         function()
           local telescope = require "telescope"

@@ -42,7 +42,7 @@ return {
     highlight = { backdrop = true, matches = "IncSearch", priority = 5000 },
     modes = {
       char = { enabled = true, jump_labels = false },
-      search = { enabled = true },
+      search = { enabled = false },
       treesitter = { enabled = false },
     },
     search = { incremental = true, mode = "current_line" },
@@ -52,4 +52,5 @@ return {
     require("flash").setup(opts)
     vim.api.nvim_set_hl(0, "FlashLabel", { fg = "#EBCB8B", bold = true })
   end,
+  vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>", { silent = true }),
 }

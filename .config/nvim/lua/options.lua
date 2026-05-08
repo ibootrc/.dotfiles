@@ -82,8 +82,8 @@ vim.keymap.set("n", "<esc>", "<cmd>NoiceDismiss<CR>", { nowait = true })
 -- Window Navigation
 vim.keymap.set("n", "<C-h>", "<C-w>h", { desc = "Focus left" })
 vim.keymap.set("n", "<C-l>", "<C-w>l", { desc = "Focus right" })
-vim.keymap.set("n", "<C-j>", "<C-w>j", { desc = "Focus lower" })
-vim.keymap.set("n", "<C-k>", "<C-w>k", { desc = "Focus upper" })
+vim.keymap.set("n", "<C-J>", "<C-w>j", { desc = "Focus lower" })
+vim.keymap.set("n", "<C-K>", "<C-w>k", { desc = "Focus upper" })
 vim.opt.splitright = true
 vim.opt.splitbelow = true
 
