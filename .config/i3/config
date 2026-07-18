@@ -146,7 +146,7 @@ for_window [urgent="latest" class="firefox" workspace=$ws1] focus ; workspace nu
 bindsym $mod+Shift+c reload
 
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
-bindsym Shift+r restart
+bindsym Shift+Ctrl+r restart
 
 # exit i3 (logs you out of your X session)
 bindsym $mod+Escape exec i3-msg exit
@@ -191,7 +191,6 @@ exec_always --no-startup-id autotiling
 exec --no-startup-id "setxkbmap -model pc104 -layout us,ara -option grp:alt_shift_toggle"
 exec --no-startup-id XDG_MENU_PREFIX=arch- kbuildsycoca6
 exec --no-startup-id libinput-gestures-setup start
-#exec --no-startup-id xrandr --output DP1 --mode 1024x768
 exec --no-startup-id dunst
 exec --no-startup-id kanata -c ~/.config/kanata/config.kbd
 exec redshift -P -O 5000
