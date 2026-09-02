@@ -2,7 +2,7 @@
 vim.g.mapleader = " "
 
 -- General options
-vim.opt.timeoutlen = 200
+vim.opt.timeoutlen = 500
 vim.opt.relativenumber = true
 vim.opt.number = true
 vim.opt.clipboard = "unnamedplus"

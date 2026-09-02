@@ -2,6 +2,9 @@
 PreviewSize=80
 
 [General]
+LockPanels=false
+ShowStatusBar=FullWidth
+ShowZoomSlider=true
 Version=202
 ViewPropsTimestamp=2026,3,10,19,39,42.126
 
@@ -13,7 +16,7 @@ Places Icons Static Size=22
 MenuBar=Disabled
 
 [PreviewSettings]
-Plugins=directorythumbnail,imagethumbnail,jpegthumbnail,ffmpegthumbs
+Plugins=directorythumbnail,imagethumbnail,jpegthumbnail
 
 [UiSettings]
 ColorScheme=WhiteSurDark
