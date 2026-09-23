@@ -1,6 +1,7 @@
 [global]
 # Display
 follow = mouse
+layer = top
 width = 350
 height = (0, 300)
 origin = top-right

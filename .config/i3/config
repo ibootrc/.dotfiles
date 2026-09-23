@@ -22,8 +22,6 @@ bindsym --release F9 exec obsidian --disable-gpu --disable-software-rasterizer -
 bindsym --release Shift+F3 exec firefox --private-window
 bindsym --release F4 exec dolphin
 bindsym $mod+x --release exec --no-startup-id xkill
-bindsym $mod+u exec xbacklight -inc 15
-bindsym $mod+d exec xbacklight -dec 15
 # Reboot & shutdown
 bindsym Ctrl+Shift+s exec shutdown -now
 
@@ -128,9 +126,10 @@ for_window [instance="Places"] floating enable resize set 886 636, move position
 for_window [class="^obsidian$"] border none
 for_window [class="pavucontrol"] floating enable resize set 640 440, move position center
 
+# Assign
 
-# Using 'focus' prevents the kill command from hitting the main window if no panel is found
-bindsym --whole-window button2 [class="(?i)firefox" instance="(?i)places|toolkit"] focus; kill; [title="(?i)library|downloads"] focus; kill
+assign [class="firefox"] $ws1
+assign [class="Hermes"] $ws2
 
 ## Screenshots
 bindsym Print exec --no-startup-id maim "/home/$USER/Pictures/ScreenShot/$(date).png" && notify-send "Screenshot has been taken"
@@ -182,11 +181,9 @@ mode "resize" {
 bindsym Ctrl+Shift+l exec --no-startup-id betterlockscreen -l blur 100 
 
 
-
 # Autostart applications
 exec --no-startup-id nitrogen --restore
 exec --no-startup-id picom -b
-#exec --no-startup-id pasystray
 exec --no-startup-id pasystray --key-grabbing --volume-inc=5
 exec_always --no-startup-id bash -c "sleep 2; nm-applet"
 exec --no-startup-id xclip
@@ -197,7 +194,11 @@ exec --no-startup-id XDG_MENU_PREFIX=arch- kbuildsycoca6
 exec --no-startup-id libinput-gestures-setup start
 exec --no-startup-id dunst
 exec --no-startup-id kanata -c ~/.config/kanata/config.kbd
-exec redshift -P -O 5000
+exec --no-startup-id redshift -P -O 5000
+exec --no-startup-id xsettingsd &
+
+exec --no-startup-id firefox
+exec --no-startup-id /home/echo/.local/bin/hermes desktop
 
 
 #client.focused #01D8DD #01D8DD #FFFFFF #01D8DD #01D8DD
@@ -207,8 +208,7 @@ bar {
 		position bottom
 		font xft:URWGothic-Book 11
 		strip_workspace_numbers yes
-
-		tray_output HDMI-1
+		tray_output HDMI-2
 		#tray_output primary
     colors {
         # Transparent dark background (alpha = CC ≈ 80%)

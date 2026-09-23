@@ -2,11 +2,16 @@
 PreviewSize=80
 
 [General]
+EditableUrl=true
 LockPanels=false
-ShowStatusBar=FullWidth
+RememberOpenedTabs=false
+ShowFullPathInTitlebar=true
 ShowZoomSlider=true
 Version=202
 ViewPropsTimestamp=2026,3,10,19,39,42.126
+
+[IconsMode]
+PreviewSize=96
 
 [KFileDialog Settings]
 Places Icons Auto-resize=false
@@ -19,4 +24,8 @@ MenuBar=Disabled
 Plugins=directorythumbnail,imagethumbnail,jpegthumbnail
 
 [UiSettings]
-ColorScheme=WhiteSurDark
+ColorScheme[$d]
+
+[General]
+TerminalApplication=kitty
+TerminalService=kitty.desktop

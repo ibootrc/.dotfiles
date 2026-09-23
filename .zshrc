@@ -44,7 +44,6 @@ alias ua-update-all='export TMPFILE="$(mktemp)"; \
       && ua-drop-caches \
       && yay -Syyu --noconfirm'
 
-
 # -----------------------------
 # LESS COLORS
 # -----------------------------
@@ -59,6 +58,12 @@ export GROFF_NO_SGR=1
 
 # PATH additions
 export PATH=$PATH:/usr/local/go/bin
+
+# Force pixel-smooth input handling for mice and arrow keys
+export MOZ_USE_XINPUT2=1
+
+# Tell Firefox to use modern EGL pathways for the Intel driver under X11
+export MOZ_X11_EGL=1
 
 # -----------------------------
 # AUTOSUGGESTIONS KEYBIND
@@ -134,5 +139,4 @@ nvm() {
 # Preload Rofi desktop cache
 (rofi -dump-config > /dev/null 2>&1 &)
 
-# Hermes Agent — ensure ~/.local/bin is on PATH
 export PATH="$HOME/.local/bin:$PATH"
