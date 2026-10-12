@@ -24,7 +24,7 @@ MenuBar=Disabled
 Plugins=directorythumbnail,imagethumbnail,jpegthumbnail
 
 [UiSettings]
-ColorScheme[$d]
+ColorScheme=*
 
 [General]
 TerminalApplication=kitty
